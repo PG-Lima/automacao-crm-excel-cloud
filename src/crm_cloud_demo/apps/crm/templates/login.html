@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Demo | Entrar</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #101827;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #e5e7eb;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            background: #1b2738;
+            border: 1px solid #344256;
+            border-radius: 16px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .3);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            background: #2563eb;
+            border-radius: 12px;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .brand-name {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .brand-subtitle {
+            margin-top: 3px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 9px;
+        }
+
+        .description {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .field {
+            margin-bottom: 19px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #425168;
+            border-radius: 8px;
+            background: #111c2b;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, .15);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 9px;
+            padding: 14px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .error {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: rgba(220, 38, 38, .12);
+            border: 1px solid rgba(248, 113, 113, .3);
+            color: #fca5a5;
+            font-size: 13px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #344256;
+            color: #64748b;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .demo-label {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #253b58;
+            color: #93c5fd;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            <div>
+                <div class="brand-name">CRM Dashboard</div>
+                <div class="brand-subtitle">Sales Management System</div>
+            </div>
+        </div>
+
+        <h1>Bem-vindo de volta</h1>
+
+        <p class="description">
+            Entre na plataforma para acessar suas negociações
+            e relatórios demonstrativos.
+        </p>
+
+        {% if error %}
+            <div class="error" role="alert">{{ error }}</div>
+        {% endif %}
+
+        <form action="/login" method="post">
+            <div class="field">
+                <label for="username">Usuário</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Digite seu usuário"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">Senha</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit">Entrar na plataforma</button>
+        </form>
+
+        <div class="footer">
+            CRM Demonstrativo · Projeto de Portfólio
+            <br>
+            <span class="demo-label">Ambiente fictício e local</span>
+        </div>
+    </main>
+</body>
+</html>

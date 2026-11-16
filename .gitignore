@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Configurações e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Playwright
+playwright/.auth/
+.browser/
+browser_data/
+user_data/
+
+# Logs
+logs/
+*.log
+
+# Bancos de dados locais
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos gerados
+downloads/
+exports/
+reports/
+storage/
+*.xlsx
+*.xls
+*.csv
+
+# Temporários
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+
+# Navegadores do Playwright
+.playwright-browsers/
