@@ -9,11 +9,13 @@
 
 ## Português
 
-Projeto independente de portfólio que demonstra a automação de um processo de transferência de relatórios entre duas aplicações web fictícias: um CRM e uma biblioteca de documentos.
+Este projeto tem **dois objetivos igualmente importantes: ser um portfólio de desenvolvimento e um recurso de aprendizagem aberto**.
 
-A solução utiliza Python e Playwright para controlar o navegador, gerar e baixar um relatório Excel no CRM demonstrativo e, em seguida, enviá-lo à aplicação Cloud Library.
+Como portfólio, demonstra como identifiquei um problema, escolhi tecnologias e desenvolvi uma solução de automação de ponta a ponta. Como material didático, busca ajudar quem enfrenta um desafio semelhante a entender o processo, reproduzir a solução e adaptá-la à própria realidade.
 
-O projeto foi desenvolvido para fins educacionais, prática de desenvolvimento de software e construção de portfólio. As aplicações são fictícias, executadas localmente e utilizam dados sintéticos.
+O cenário é a transferência automatizada de relatórios entre duas aplicações web fictícias: um CRM e uma biblioteca de documentos. A solução utiliza Python e Playwright para controlar o navegador, gerar e baixar um relatório Excel no CRM demonstrativo e, em seguida, enviá-lo à aplicação Cloud Library.
+
+As aplicações são fictícias, executadas localmente e utilizam dados sintéticos. A proposta não é apenas entregar um código pronto, mas compartilhar o caminho, as decisões técnicas e o conhecimento necessário para que outras pessoas aprendam com ele.
 
 ### Demonstração do fluxo
 
@@ -189,8 +191,15 @@ O projeto é uma simulação local e independente. Entre as medidas documentadas
 
 O projeto é educacional e **não deve ser considerado uma aplicação pronta para produção**. Consulte a [Política de Segurança](docs/security.md).
 
+### Como aprender com o projeto
+
+A ideia é que você consiga acompanhar o raciocínio, e não apenas copiar comandos. Comece pelo [Guia de Aprendizagem](docs/learning-guide.md), que organiza o estudo em etapas: entender o problema, preparar o ambiente, conhecer a arquitetura, acompanhar a automação e verificar o comportamento da solução.
+
+O guia também indica o que observar no código e quais perguntas você deve conseguir responder ao final de cada etapa.
+
 ### Próximas melhorias
 
+- Ampliar os tutoriais com explicações guiadas dos módulos e funções do código.
 - Publicar e manter a suíte de testes unitários e de integração no repositório.
 - Aprimorar o tratamento de exceções e falhas.
 - Integrar o módulo de logs ao fluxo principal.
@@ -198,11 +207,13 @@ O projeto é educacional e **não deve ser considerado uma aplicação pronta pa
 - Avaliar a execução programada pelo Agendador de Tarefas do Windows.
 - Continuar a revisão de segurança e documentação.
 
-### Objetivo profissional
+### Dois objetivos, a mesma importância
 
-Este projeto faz parte do meu desenvolvimento prático em automação de processos, Python, desenvolvimento web, automação de navegadores, manipulação de dados e Excel e segurança da informação.
+**Portfólio:** este projeto registra minha evolução prática em automação de processos, Python, desenvolvimento web, automação de navegadores, manipulação de dados e Excel e segurança da informação. Demonstra como transformei um problema em uma solução estruturada.
 
-**Desenvolvido de forma independente no Brasil, com aplicações fictícias e infraestrutura local, para fins educacionais e de portfólio profissional.**
+**Aprendizagem e compartilhamento:** quero que alguém com uma necessidade semelhante encontre aqui um ponto de partida útil, entenda por que cada tecnologia foi utilizada e consiga reproduzir ou adaptar a solução. A documentação em português e inglês ajuda a compartilhar esse conhecimento com mais pessoas, sem deixar de valorizar a origem brasileira do projeto.
+
+**Desenvolvido de forma independente no Brasil. Construído para demonstrar meu trabalho e, ao mesmo tempo, ajudar outras pessoas a aprender.**
 
 Documentação: [Arquitetura — PT-BR](docs/architecture.md) · [Architecture — EN](docs/architecture.en.md) · [Segurança — PT-BR](docs/security.md) · [Security — EN](docs/security.en.md)
 
@@ -210,11 +221,13 @@ Documentação: [Arquitetura — PT-BR](docs/architecture.md) · [Architecture �
 
 ## English
 
-An independent portfolio project demonstrating the automation of a report-transfer workflow between two fictional web applications: a CRM and a document library.
+This project has **two equally important goals: to serve as a software development portfolio and as an open learning resource**.
 
-The solution uses Python and Playwright to control a browser, generate and download an Excel report from the demo CRM, and then upload it to the Cloud Library application.
+As a portfolio project, it demonstrates how I identified a problem, selected technologies, and built an end-to-end automation solution. As an educational resource, it aims to help people facing a similar challenge understand the workflow, reproduce the solution, and adapt it to their own needs.
 
-This project was built for educational purposes, software development practice, and portfolio development. Both applications are fictional, run locally, and use synthetic data.
+The scenario is the automated transfer of reports between two fictional web applications: a CRM and a document library. The solution uses Python and Playwright to control a browser, generate and download an Excel report from the demo CRM, and then upload it to the Cloud Library application.
+
+Both applications are fictional, run locally, and use synthetic data. The goal is not merely to provide finished code, but to share the process, technical decisions, and knowledge that can help others learn from it.
 
 ### Workflow demonstration
 
@@ -390,8 +403,15 @@ This project is an independent local simulation. The documented measures include
 
 This is an educational project and **must not be considered production-ready software**. See the [Security Policy](docs/security.en.md).
 
+### Learning path
+
+The goal is to help you understand the reasoning behind the implementation, not just copy commands. Start with the [Learning Guide](docs/learning-guide.en.md), which organizes the journey into stages: understand the problem, prepare the environment, explore the architecture, follow the automation, and verify the solution's behavior.
+
+The guide also points to the code areas to inspect and the questions you should be able to answer at the end of each stage.
+
 ### Planned improvements
 
+- Expand the tutorials with guided explanations of code modules and functions.
 - Publish and maintain the unit and integration test suite in the repository.
 - Improve exception and failure handling.
 - Integrate the logging module into the main workflow.
@@ -399,10 +419,12 @@ This is an educational project and **must not be considered production-ready sof
 - Evaluate scheduled execution through Windows Task Scheduler.
 - Continue security and documentation reviews.
 
-### Professional development goals
+### Two equally important goals
 
-This project supports my hands-on development in process automation, Python, web development, browser automation, data and Excel manipulation, and information security.
+**Portfolio:** this project documents my hands-on development in process automation, Python, web development, browser automation, data and Excel manipulation, and information security. It shows how I turned a problem into a structured solution.
 
-**Independently developed in Brazil using fictional applications and local infrastructure for educational and professional portfolio purposes.**
+**Learning and knowledge sharing:** I want people with a similar need to find a useful starting point here, understand why each technology was chosen, and learn how to reproduce or adapt the solution. Documentation in Portuguese and English helps share this knowledge with a wider audience while keeping the project's Brazilian roots visible.
+
+**Independently developed in Brazil. Built to demonstrate my work and, at the same time, help others learn.**
 
 Documentation: [Architecture — EN](docs/architecture.en.md) · [Arquitetura — PT-BR](docs/architecture.md) · [Security — EN](docs/security.en.md) · [Segurança — PT-BR](docs/security.md)
