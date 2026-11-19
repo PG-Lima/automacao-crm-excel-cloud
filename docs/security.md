@@ -1,5 +1,7 @@
 # Política de Segurança do Projeto
 
+**English:** [Read the English version](security.en.md).
+
 ## 1. Objetivo
 
 Este documento descreve as medidas de segurança implementadas e as melhorias planejadas no projeto `automacao-crm-excel-cloud`.
