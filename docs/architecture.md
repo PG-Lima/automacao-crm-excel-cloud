@@ -6,6 +6,8 @@
 
 O projeto `automacao-crm-excel-cloud` demonstra um processo de automação web desenvolvido em Python, utilizando Playwright para controlar um navegador e interagir com duas aplicações web independentes.
 
+Esta documentação atende a dois propósitos: registrar a arquitetura do projeto como parte de um portfólio de desenvolvimento e servir como material de aprendizagem para quem deseja compreender, reproduzir ou adaptar uma automação semelhante.
+
 A solução contém três componentes principais:
 
 - **CRM demonstrativo:** gera relatórios comerciais fictícios em Excel.
@@ -211,6 +213,8 @@ Próximas melhorias:
 
 ## 10. Considerações finais
 
-A arquitetura foi organizada para demonstrar conhecimentos práticos em automação web, desenvolvimento Python, aplicações web, manipulação de planilhas, persistência de dados e segurança.
+A arquitetura foi organizada para resolver um cenário prático de transferência de relatórios e, ao mesmo tempo, tornar visíveis as decisões técnicas envolvidas. Ela documenta como as aplicações, o robô, o navegador, o armazenamento e o banco de dados trabalham em conjunto.
 
-O projeto foi desenvolvido de forma independente, com aplicações fictícias e infraestrutura local, exclusivamente para fins educacionais e construção de portfólio profissional.
+O projeto cumpre dois objetivos de igual importância: demonstrar competências práticas em um portfólio de desenvolvimento e compartilhar conhecimento para que outras pessoas possam estudar a arquitetura, reproduzir o fluxo e adaptar a solução a problemas semelhantes.
+
+A implementação é independente, utiliza aplicações fictícias e infraestrutura local e foi desenvolvida no Brasil.
