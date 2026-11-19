@@ -90,6 +90,8 @@ automacao-crm-excel-cloud/
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture.en.md
+│   ├── learning-guide.md
+│   ├── learning-guide.en.md
 │   ├── security.md
 │   └── security.en.md
 ├── .env.example
