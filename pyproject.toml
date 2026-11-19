@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "automacao-crm-excel-cloud"
 version = "0.1.0"
-description = "Projeto demonstrativo de automação web entre CRM e biblioteca de documentos"
+description = "Bilingual PT-BR/English demo of web automation between a CRM and a document library"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi",
