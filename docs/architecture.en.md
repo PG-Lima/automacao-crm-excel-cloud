@@ -6,6 +6,8 @@
 
 The `automacao-crm-excel-cloud` project demonstrates a web automation workflow built with Python. It uses Playwright to control a browser and interact with two independent web applications.
 
+This documentation serves two purposes: to record the project's architecture as part of a software development portfolio and to provide learning material for people who want to understand, reproduce, or adapt a similar automation workflow.
+
 The solution contains three main components:
 
 - **Demo CRM:** generates fictional business reports in Excel.
@@ -211,6 +213,8 @@ Planned improvements:
 
 ## 10. Final considerations
 
-The architecture was organized to demonstrate practical knowledge of web automation, Python development, web applications, spreadsheet handling, data persistence, and security.
+The architecture was designed to address a practical report-transfer scenario while making the technical decisions behind the solution understandable. It documents how the applications, automation robot, browser, storage layer, and database work together.
 
-The project was independently developed with fictional applications and local infrastructure, exclusively for educational purposes and professional portfolio development.
+The project has two equally important goals: to demonstrate practical skills as part of a software development portfolio and to share knowledge so others can study the architecture, reproduce the workflow, and adapt the solution to similar problems.
+
+The implementation is independent, uses fictional applications and local infrastructure, and was developed in Brazil.
