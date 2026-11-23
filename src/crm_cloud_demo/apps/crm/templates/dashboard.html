@@ -565,9 +565,11 @@
                             </td>
 
                             {% set formatted_value = "{:,.2f}".format(deal.valor) %}
-                            {% set formatted_value = formatted_value.replace(",", "X").replace(".", ",").replace("X", ".") %}
+                            {% if lang == "pt" %}
+                                {% set formatted_value = formatted_value.replace(",", "X").replace(".", ",").replace("X", ".") %}
+                            {% endif %}
 
-                            <td>R$ {{ formatted_value }}</td>
+                            <td>{{ t.currency_prefix }} {{ formatted_value }}</td>
                             <td>{% if lang == "en" %}{{ deal.data.strftime("%m/%d/%Y") }}{% else %}{{ deal.data.strftime("%d/%m/%Y") }}{% endif %}</td>
                         </tr>
                         {% else %}
