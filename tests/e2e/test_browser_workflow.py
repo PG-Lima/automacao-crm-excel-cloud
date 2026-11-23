@@ -116,8 +116,8 @@ def test_real_playwright_workflow_moves_report_from_crm_to_cloud_library(
         assert "Login no CRM realizado." in log_content
         assert "Login na biblioteca realizado." in log_content
         assert "Automação finalizada com sucesso." in log_content
-        assert settings.crm_demo_password not in log_content
-        assert settings.cloud_demo_password not in log_content
+        assert test_settings.crm_demo_password not in log_content
+        assert test_settings.cloud_demo_password not in log_content
     finally:
         for server, thread in reversed(running_servers):
             server.should_exit = True
