@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import runpy
 from contextlib import asynccontextmanager
 from pathlib import Path
 from types import SimpleNamespace
@@ -388,10 +387,13 @@ def test_module_entrypoint_starts_the_automation(monkeypatch):
     )
     monkeypatch.setattr("asyncio.run", fake_asyncio_run)
 
-    runpy.run_module(
-        "crm_cloud_demo.automation.run",
-        run_name="__main__",
-    )
+    source_path = Path(run_module.__file__)
+    source = source_path.read_text(encoding="utf-8")
+    namespace = {
+        "__name__": "__main__",
+        "__package__": "crm_cloud_demo.automation",
+    }
+    exec(compile(source, str(source_path), "exec"), namespace)
 
     assert calls == ["run_automation"]
 
