@@ -51,7 +51,14 @@ def _fetch_brl_to_usd_rate() -> ExchangeRate:
     try:
         with urlopen(request, timeout=REQUEST_TIMEOUT_SECONDS) as response:
             payload = json.loads(response.read().decode("utf-8"), parse_float=Decimal)
-    except (HTTPError, URLError, TimeoutError, OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+    except (
+        HTTPError,
+        URLError,
+        TimeoutError,
+        OSError,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+    ) as exc:
         raise ExchangeRateError(
             "The BRL/USD reference rate could not be retrieved."
         ) from exc
