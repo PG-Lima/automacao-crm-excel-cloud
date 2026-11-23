@@ -483,7 +483,7 @@
             <div class="card">
                 <div class="card-label">{{ t.dashboard_period }}</div>
                 <div class="card-value" style="font-size: 17px;">
-                    {{ start_date.split("-")[2] }}/{{ start_date.split("-")[1] }}/{{ start_date.split("-")[0] }}
+                    {% if lang == "en" %}{{ start_date.split("-")[1] }}/{{ start_date.split("-")[2] }}/{{ start_date.split("-")[0] }}{% else %}{{ start_date.split("-")[2] }}/{{ start_date.split("-")[1] }}/{{ start_date.split("-")[0] }}{% endif %}
                 </div>
                 <div class="card-detail">
                     {{ t.until }} {% if lang == "en" %}{{ end_date.split("-")[1] }}/{{ end_date.split("-")[2] }}/{{ end_date.split("-")[0] }}{% else %}{{ end_date.split("-")[2] }}/{{ end_date.split("-")[1] }}/{{ end_date.split("-")[0] }}{% endif %}
