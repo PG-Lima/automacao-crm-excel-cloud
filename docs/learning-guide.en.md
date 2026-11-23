@@ -83,6 +83,7 @@ Read these files in order:
 4. **src/crm_cloud_demo/automation/cloud.py** — contains Cloud Library login and file upload.
 5. **src/crm_cloud_demo/config.py** — gathers the settings used by the applications and the automation.
 6. **src/crm_cloud_demo/localization.py** — contains the Portuguese and English text and the rules that preserve the language preference.
+7. **src/crm_cloud_demo/currency.py** — retrieves and validates the BRL/USD reference rate, caches it, and performs currency conversion.
 
 While reading, follow this sequence:
 
@@ -114,6 +115,9 @@ Questions to guide your reading:
 - How is the date range applied?
 - Which worksheets are created?
 - How are values and dates formatted?
+- Why do original records remain in BRL even when the English interface displays USD?
+- How does `currency.py` retrieve the BRL/USD rate and show its reference date?
+- Why does the conversion use `Decimal` and a cached rate?
 - Why does the function return an in-memory file before the application makes it available for download?
 
 ### Step 5 — Understand how the Cloud Library receives and stores the file
@@ -144,7 +148,7 @@ A success message alone is not enough. Think about evidence for each step:
 - Did the Cloud Library display a confirmation?
 - Does the document appear in the history with the expected version and metadata?
 
-**Test status in the repository:** unit tests are available in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report generation in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+**Test status in the repository:** unit tests are available in `tests/unit/` for language selection, translations, safe return-path validation, BRL/USD conversion, rate caching, and Excel report generation in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 To run the published tests, activate the virtual environment and execute:
 
