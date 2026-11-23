@@ -124,10 +124,10 @@ async def upload_document(
     file: Annotated[UploadFile, File()],
 ):
 
-    if not _is_authenticated(request):
-        return RedirectResponse("/login", status_code=303)
-
     try:
+        if not _is_authenticated(request):
+            return RedirectResponse("/login", status_code=303)
+
         content = await file.read(MAX_UPLOAD_BYTES + 1)
 
         result = save_document(
