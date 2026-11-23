@@ -271,9 +271,9 @@ The implemented measures do not constitute a security certification and do not g
 - [ ] Authentication-attempt rate limiting.
 - [ ] Full logging integration.
 - [ ] Log rotation.
-- [x] Initial unit tests for localization and Excel report exports.
-- [ ] Expanded test coverage and integration tests.
-- [ ] Automated dependency auditing.
+- [x] Unit, integration, and E2E tests with real Chromium.
+- [x] GitHub Actions running tests, coverage, and Ruff.
+- [ ] Automated dependency vulnerability auditing.
 - [ ] Final review of files staged for publication.
 
 ## 14. Security commitment
