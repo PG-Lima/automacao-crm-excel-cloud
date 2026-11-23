@@ -33,6 +33,8 @@ Responsabilidades:
 - Permitir a consulta por período.
 - Gerar relatórios em Excel utilizando openpyxl.
 - Disponibilizar o download dos relatórios.
+- Exibir a interface em português (PT-BR) e inglês.
+- Gerar o relatório Excel com cabeçalhos, status e resumo no idioma selecionado.
 
 Endereço local:
 
@@ -65,7 +67,8 @@ Aplicação web independente, também desenvolvida com FastAPI.
 
 Responsabilidades:
 
-- Apresentar uma tela de autenticação.
+- Apresentar uma tela de autenticação em português e inglês.
+- Permitir a alternância de idioma na tela de login e no painel.
 - Receber arquivos no formato `.xlsx`.
 - Validar os arquivos recebidos.
 - Aplicar limites de tamanho e estrutura.
@@ -79,6 +82,14 @@ Responsabilidades:
 Endereço local:
 
 `http://127.0.0.1:8001`
+
+### 2.4 Idiomas e localização
+
+O CRM e a Cloud Library oferecem interface em português (PT-BR) e inglês.
+
+A preferência é armazenada na sessão de cada aplicação e pode ser alterada pelo seletor `PT-BR / EN`. Como as aplicações possuem sessões independentes, o idioma pode ser escolhido separadamente em cada sistema.
+
+A localização altera os textos exibidos, mensagens de validação, formatação de datas e valores e conteúdo do relatório Excel. Os nomes técnicos dos campos, rotas, formulários e seletores usados pelo Playwright permanecem estáveis para não quebrar a automação.
 
 ## 3. Fluxo de execução
 
