@@ -143,7 +143,7 @@ Não basta observar uma mensagem de sucesso. Pense em evidências para cada etap
 - A Cloud Library apresentou a confirmação?
 - O documento aparece no histórico, com a versão e os metadados esperados?
 
-**Estado dos testes no repositório:** já existe um teste unitário inicial em `tests/unit/test_localization.py`, voltado à seleção de idioma, às traduções e à validação de caminhos de retorno. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+**Estado dos testes no repositório:** há testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno e geração dos relatórios Excel em português e inglês. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 ### Etapa 7 — Pense em como adaptar a solução
 
