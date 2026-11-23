@@ -83,6 +83,7 @@ Leia os arquivos nesta ordem:
 4. **src/crm_cloud_demo/automation/cloud.py** — contém o login na Cloud Library e o envio do arquivo.
 5. **src/crm_cloud_demo/config.py** — reúne as configurações usadas pelas aplicações e pela automação.
 6. **src/crm_cloud_demo/localization.py** — reúne os textos em português e inglês e as regras para manter a preferência de idioma.
+7. **src/crm_cloud_demo/currency.py** — consulta e valida a taxa de referência BRL/USD, mantém cache e realiza a conversão.
 
 Enquanto lê, acompanhe esta sequência:
 
@@ -114,6 +115,9 @@ Perguntas para orientar a leitura:
 - Como o período é aplicado?
 - Quais abas são criadas na planilha?
 - Como os valores e as datas são formatados?
+- Por que os registros continuam em BRL mesmo quando a interface inglesa os mostra em USD?
+- Como `currency.py` obtém a taxa BRL/USD e como a data da taxa é apresentada?
+- Por que a conversão usa `Decimal` e uma taxa em cache?
 - Por que a função devolve um arquivo em memória antes de a aplicação disponibilizar o download?
 
 ### Etapa 5 — Entenda como a Cloud Library recebe e armazena o arquivo
@@ -144,7 +148,7 @@ Não basta observar uma mensagem de sucesso. Pense em evidências para cada etap
 - A Cloud Library apresentou a confirmação?
 - O documento aparece no histórico, com a versão e os metadados esperados?
 
-**Estado dos testes no repositório:** há testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno e geração dos relatórios Excel em português e inglês. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+**Estado dos testes no repositório:** há testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno, conversão BRL/USD, cache da taxa e geração dos relatórios Excel em português e inglês. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 Para executar os testes publicados, com o ambiente virtual ativado, rode:
 
