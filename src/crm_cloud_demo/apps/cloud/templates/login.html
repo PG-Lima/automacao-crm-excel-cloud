@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ t.html_lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar | Biblioteca Demo</title>
+    <title>{{ t.cloud_login_title }}</title>
 
     <style>
         * {
@@ -41,6 +41,33 @@
             border-radius: 12px;
             background: #2563eb;
             font-size: 24px;
+        }
+
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .language-switch a {
+            padding: 7px 10px;
+            border: 1px solid rgba(148, 163, 184, .35);
+            border-radius: 7px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .language-switch a.active {
+            border-color: #60a5fa;
+            background: rgba(37, 99, 235, .2);
+            color: #bfdbfe;
         }
 
         h1 {
@@ -112,14 +139,17 @@
 </head>
 
 <body>
+    <nav class="language-switch" aria-label="Language">
+        <a href="/language/pt?next_path=/login" class="{{ 'active' if lang == 'pt' else '' }}">PT-BR</a>
+        <a href="/language/en?next_path=/login" class="{{ 'active' if lang == 'en' else '' }}">EN</a>
+    </nav>
     <main class="login-card">
         <div class="icon">☁</div>
 
-        <h1>Biblioteca de documentos</h1>
+        <h1>{{ t.document_library }}</h1>
 
         <p class="subtitle">
-            Acesse o ambiente demonstrativo para armazenar
-            e consultar relatórios.
+            {{ t.cloud_login_description }}
         </p>
 
         {% if error %}
@@ -127,7 +157,7 @@
         {% endif %}
 
         <form method="POST" action="/login">
-            <label for="username">Usuário</label>
+            <label for="username">{{ t.username }}</label>
             <input
                 type="text"
                 id="username"
@@ -136,7 +166,7 @@
                 required
             >
 
-            <label for="password">Senha</label>
+            <label for="password">{{ t.password }}</label>
             <input
                 type="password"
                 id="password"
@@ -145,11 +175,11 @@
                 required
             >
 
-            <button type="submit">Entrar na biblioteca</button>
+            <button type="submit">{{ t.cloud_login_button }}</button>
         </form>
 
         <p class="demo-label">
-            AMBIENTE FICTÍCIO · PROJETO DEMONSTRATIVO
+            {{ t.fictional_demo }}
         </p>
     </main>
 </body>
