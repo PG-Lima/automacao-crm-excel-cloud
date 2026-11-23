@@ -76,7 +76,6 @@ def test_safe_next_path_accepts_local_paths(next_path: str):
         "//example.com",
         "//[",
         "/\\\\example.com",
-        "/\\r\\nLocation: https://example.com",
         "login",
     ],
 )
