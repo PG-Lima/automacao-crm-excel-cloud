@@ -143,7 +143,7 @@ A success message alone is not enough. Think about evidence for each step:
 - Did the Cloud Library display a confirmation?
 - Does the document appear in the history with the expected version and metadata?
 
-**Test status in the repository:** an initial unit test file is available at `tests/unit/test_localization.py`. It covers language selection, translations, and safe return-path validation. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+**Test status in the repository:** unit tests are available in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report generation in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 ### Step 7 — Think about adapting the solution
 
