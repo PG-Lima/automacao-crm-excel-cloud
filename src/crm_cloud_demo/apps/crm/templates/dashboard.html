@@ -464,8 +464,12 @@
 
         <h2 class="section-heading">{{ t.general_indicators }}</h2>
 
-        {% set formatted_total = "{:,.2f}".format(total_value) %}
-        {% if lang == "pt" %}{% set formatted_total = formatted_total.replace(",", "X").replace(".", ",").replace("X", ".") %}{% endif %}
+        {% if total_value is not none %}
+            {% set formatted_total = "{:,.2f}".format(total_value) %}
+            {% if lang == "pt" %}{% set formatted_total = formatted_total.replace(",", "X").replace(".", ",").replace("X", ".") %}{% endif %}
+        {% else %}
+            {% set formatted_total = "—" %}
+        {% endif %}
 
         <section class="cards">
             <div class="card">
@@ -478,6 +482,11 @@
                 <div class="card-label">{{ t.total_deal_value }}</div>
                 <div class="card-value">{{ t.currency_prefix }} {{ formatted_total }}</div>
                 <div class="card-detail">{{ t.fictional_values }}</div>
+                {% if exchange_rate_note %}
+                    <div class="card-detail">{{ exchange_rate_note }}</div>
+                {% elif exchange_rate_error %}
+                    <div class="card-detail">{{ t.exchange_rate_unavailable }}</div>
+                {% endif %}
             </div>
 
             <div class="card">
@@ -564,12 +573,15 @@
                                 {% endif %}
                             </td>
 
-                            {% set formatted_value = "{:,.2f}".format(deal.valor) %}
-                            {% if lang == "pt" %}
-                                {% set formatted_value = formatted_value.replace(",", "X").replace(".", ",").replace("X", ".") %}
+                            {% if deal.display_value is not none %}
+                                {% set formatted_value = "{:,.2f}".format(deal.display_value) %}
+                                {% if lang == "pt" %}
+                                    {% set formatted_value = formatted_value.replace(",", "X").replace(".", ",").replace("X", ".") %}
+                                {% endif %}
+                                <td>{{ t.currency_prefix }} {{ formatted_value }}</td>
+                            {% else %}
+                                <td>—</td>
                             {% endif %}
-
-                            <td>{{ t.currency_prefix }} {{ formatted_value }}</td>
                             <td>{% if lang == "en" %}{{ deal.data.strftime("%m/%d/%Y") }}{% else %}{{ deal.data.strftime("%d/%m/%Y") }}{% endif %}</td>
                         </tr>
                         {% else %}
