@@ -217,7 +217,7 @@ Completed implementation steps include:
 
 Planned improvements:
 
-- Add unit and integration tests to the published repository.
+- Expand unit tests and add integration tests for the complete workflows.
 - Independently validate the report after download.
 - Integrate the logging system with the orchestrator.
 - Improve failure handling.
