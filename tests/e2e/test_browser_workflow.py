@@ -13,8 +13,7 @@ import pytest
 import uvicorn
 from openpyxl import load_workbook
 
-from crm_cloud_demo import config
-from crm_cloud_demo import logging_config
+from crm_cloud_demo import config, logging_config
 from crm_cloud_demo.apps.cloud import storage as cloud_storage
 from crm_cloud_demo.apps.crm import routes as crm_routes
 from crm_cloud_demo.automation import cloud as automation_cloud
