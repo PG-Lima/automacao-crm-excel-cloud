@@ -5,8 +5,8 @@ import sqlite3
 from io import BytesIO
 from zipfile import ZipFile
 
-import pytest
 from openpyxl import Workbook
+import pytest
 
 from crm_cloud_demo.apps.cloud import storage
 
