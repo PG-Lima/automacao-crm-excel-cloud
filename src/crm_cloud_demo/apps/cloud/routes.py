@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import Annotated
 from urllib.parse import urlencode
 
-from fastapi import APIRouter, File, Form, Request, UploadFile
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi import APIRouter, File, Request, UploadFile
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from crm_cloud_demo.localization import (
