@@ -89,7 +89,9 @@ The CRM and Cloud Library provide interfaces in Portuguese (PT-BR) and English.
 
 The language preference is stored in each application's session and can be changed through the `PT-BR / EN` selector. Since the applications have independent sessions, the language can be selected separately in each system.
 
-Localization changes visible text, validation messages, date and currency formatting, and the contents of the generated Excel report. Technical field names, routes, forms, and selectors used by Playwright remain stable so the automation is not broken.
+Localization changes visible text, validation messages, date and currency formatting, and the contents of the generated Excel report. In PT-BR mode, amounts remain in Brazilian reais (BRL). In English mode, the CRM converts BRL amounts to USD using the latest reference rate retrieved from the Frankfurter API. The rate date and source are displayed in the dashboard and recorded in the Excel summary. Original records remain stored in BRL; conversion happens only in the presentation and export layers.
+
+The `src/crm_cloud_demo/currency.py` module retrieves the BRL/USD pair, validates the response, caches the rate for six hours, and performs calculations with `Decimal`. Frankfurter provides reference rates, not real-time trading quotes. If the request fails and no valid cached rate is available, the English interface reports that conversion is unavailable and an USD report is not generated. Technical field names, routes, forms, and selectors used by Playwright remain stable so the automation is not broken.
 
 ## 3. Execution workflow
 
