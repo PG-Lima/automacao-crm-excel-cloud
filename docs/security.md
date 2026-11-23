@@ -264,7 +264,8 @@ As medidas implementadas não representam certificação de segurança nem garan
 - [ ] Limitação de tentativas de autenticação.
 - [ ] Integração completa dos logs.
 - [ ] Rotação de logs.
-- [ ] Testes unitários e de integração.
+- [x] Testes unitários iniciais para localização e exportação de relatórios Excel.
+- [ ] Ampliação dos testes e implementação de testes de integração.
 - [ ] Auditoria automatizada de dependências.
 - [ ] Revisão final dos arquivos preparados para publicação.
 
