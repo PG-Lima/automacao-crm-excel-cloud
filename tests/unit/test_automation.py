@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from pathlib import Path
+import runpy
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 
@@ -327,3 +328,53 @@ def test_orchestrator_runs_all_four_steps(monkeypatch, tmp_path):
         "upload",
     ]
     assert calls[-1] == ("upload", page, report)
+
+
+
+def test_download_crm_report_rejects_an_empty_download(tmp_path, monkeypatch):
+    monkeypatch.setattr(crm_module, "PROJECT_ROOT", tmp_path)
+    button = SimpleNamespace(
+        count=AsyncMock(return_value=1),
+        click=AsyncMock(),
+    )
+
+    class EmptyDownload:
+        suggested_filename = "empty-report.xlsx"
+
+        async def save_as(self, destination):
+            Path(destination).write_bytes(b"")
+
+    class DownloadContext:
+        async def __aenter__(self):
+            async def get_download():
+                return EmptyDownload()
+
+            return SimpleNamespace(value=get_download())
+
+        async def __aexit__(self, exc_type, exc, traceback):
+            return False
+
+    page = SimpleNamespace(
+        locator=MagicMock(return_value=button),
+        expect_download=MagicMock(return_value=DownloadContext()),
+    )
+
+    with pytest.raises(RuntimeError, match="não foi baixado corretamente"):
+        anyio.run(crm_module.download_crm_report, page)
+
+
+def test_module_entrypoint_starts_the_automation(monkeypatch):
+    calls = []
+
+    def fake_asyncio_run(coroutine):
+        calls.append(coroutine.__name__)
+        coroutine.close()
+
+    monkeypatch.setattr("asyncio.run", fake_asyncio_run)
+
+    runpy.run_module(
+        "crm_cloud_demo.automation.run",
+        run_name="__main__",
+    )
+
+    assert calls == ["run_automation"]
