@@ -89,7 +89,10 @@ async def login(
         return templates.TemplateResponse(
             request=request,
             name="login.html",
-            context=template_context(request, error=template_context(request)["t"]["invalid_credentials"]),
+            context=template_context(
+                request,
+                error=template_context(request)["t"]["invalid_credentials"],
+            ),
             status_code=401,
         )
 
@@ -103,7 +106,9 @@ async def login(
 
 @router.post("/logout")
 async def logout(request: Request):
+    language = get_language(request)
     request.session.clear()
+    request.session["language"] = language
     return RedirectResponse("/login", status_code=303)
 
 
