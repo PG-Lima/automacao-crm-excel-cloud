@@ -201,7 +201,7 @@ O `pytest` e o `pytest-cov` são dependências de desenvolvimento. A suíte est�
 Com o ambiente virtual ativado e o Chromium instalado, execute a suíte completa e a análise de cobertura:
 
 ```powershell
-python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing --cov-fail-under=100 --cov-fail-under=100
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing --cov-fail-under=100
 python -m ruff check src tests
 ```
 
@@ -433,7 +433,7 @@ The robot uses the settings defined in the `.env` file to access both applicatio
 With the virtual environment activated and Chromium installed, run the full suite and coverage report:
 
 ```powershell
-python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing --cov-fail-under=100
 python -m ruff check src tests
 ```
 
