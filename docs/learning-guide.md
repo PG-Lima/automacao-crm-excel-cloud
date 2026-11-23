@@ -148,13 +148,20 @@ Não basta observar uma mensagem de sucesso. Pense em evidências para cada etap
 - A Cloud Library apresentou a confirmação?
 - O documento aparece no histórico, com a versão e os metadados esperados?
 
-**Estado dos testes no repositório:** há testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno, conversão BRL/USD, cache da taxa e geração dos relatórios Excel em português e inglês. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+**Estado dos testes no repositório:** os testes estão organizados em três níveis:
 
-Para executar os testes publicados, com o ambiente virtual ativado, rode:
+- `tests/unit/`: valida funções isoladas de configuração, localização, conversão cambial, Excel, armazenamento, logging e automação.
+- `tests/integration/`: executa requisições HTTP contra CRM e Cloud Library para verificar autenticação, rotas, exportação, upload e persistência.
+- `tests/e2e/`: inicia os dois servidores, abre Chromium real com Playwright e percorre o fluxo completo de automação, verificando o arquivo baixado e o registro no SQLite.
+
+Com o ambiente virtual ativado e o Chromium instalado no caminho configurado pelo projeto, execute:
 
 ```powershell
-python -m pytest tests/unit -v
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m ruff check src tests
 ```
+
+Observe que cobertura mede linhas exercitadas; não é uma nota de qualidade. Leia também os cenários dos testes para entender quais comportamentos e falhas estão sendo verificados.
 
 ### Etapa 7 — Pense em como adaptar a solução
 
