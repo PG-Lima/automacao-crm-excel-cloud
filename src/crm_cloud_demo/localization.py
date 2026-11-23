@@ -10,8 +10,11 @@ TRANSLATIONS = {
         "html_lang": "pt-BR",
         "currency_prefix": "R$",
         "crm_login_title": "CRM Demo | Entrar",
+        "crm_brand_subtitle": "Sistema de Gestão Comercial",
         "welcome_back": "Bem-vindo de volta",
-        "crm_login_description": "Entre na plataforma para acessar suas negociações e relatórios demonstrativos.",
+        "crm_login_description": (
+            "Entre na plataforma para acessar suas negociações e relatórios demonstrativos."
+        ),
         "username": "Usuário",
         "username_placeholder": "Digite seu usuário",
         "password": "Senha",
@@ -57,7 +60,9 @@ TRANSLATIONS = {
         "start_after_end": "A data inicial não pode ser posterior à data final.",
         "cloud_login_title": "Entrar | Biblioteca Demo",
         "document_library": "Biblioteca de documentos",
-        "cloud_login_description": "Acesse o ambiente demonstrativo para armazenar e consultar relatórios.",
+        "cloud_login_description": (
+            "Acesse o ambiente demonstrativo para armazenar e consultar relatórios."
+        ),
         "cloud_login_button": "Entrar na biblioteca",
         "fictional_demo": "AMBIENTE FICTÍCIO · PROJETO DEMONSTRATIVO",
         "cloud_dashboard_title": "Biblioteca | Cloud Demo",
@@ -84,6 +89,7 @@ TRANSLATIONS = {
         "html_lang": "en",
         "currency_prefix": "BRL",
         "crm_login_title": "CRM Demo | Sign in",
+        "crm_brand_subtitle": "Sales Management System",
         "welcome_back": "Welcome back",
         "crm_login_description": "Sign in to access your deals and demonstration reports.",
         "username": "Username",
