@@ -158,3 +158,60 @@ def test_save_document_removes_file_when_database_insert_fails(
 
     upload_directory = isolated_storage.storage_path / "uploads"
     assert list(upload_directory.iterdir()) == []
+
+
+
+def test_validate_xlsx_rejects_excessive_uncompressed_content(monkeypatch):
+    monkeypatch.setattr(storage, "MAX_UNCOMPRESSED_BYTES", 10)
+    output = BytesIO()
+
+    with ZipFile(output, "w") as archive:
+        archive.writestr("payload.txt", "x" * 100)
+
+    with pytest.raises(storage.InvalidDocumentError, match="descompactado"):
+        storage._validate_xlsx(output.getvalue())
+
+
+def test_validate_xlsx_rejects_corrupt_zip_entries(monkeypatch):
+    monkeypatch.setattr(
+        storage.ZipFile,
+        "testzip",
+        lambda archive: "xl/workbook.xml",
+    )
+
+    with pytest.raises(storage.InvalidDocumentError, match="corrompido"):
+        storage._validate_xlsx(make_xlsx_bytes())
+
+
+def test_validate_xlsx_rejects_workbooks_without_worksheets(monkeypatch):
+    class EmptyWorkbook:
+        sheetnames: list[str] = []
+
+        def close(self):
+            pass
+
+    monkeypatch.setattr(
+        storage,
+        "load_workbook",
+        lambda *args, **kwargs: EmptyWorkbook(),
+    )
+
+    with pytest.raises(storage.InvalidDocumentError, match="não possui abas"):
+        storage._validate_xlsx(make_xlsx_bytes())
+
+
+def test_save_document_rejects_a_resolved_path_outside_upload_directory(
+    isolated_storage,
+    monkeypatch,
+):
+    class UnexpectedIdentifier:
+        hex = "../outside"
+
+    monkeypatch.setattr(storage, "uuid4", lambda: UnexpectedIdentifier())
+
+    with pytest.raises(storage.InvalidDocumentError, match="Destino de armazenamento"):
+        storage.save_document("report.xlsx", make_xlsx_bytes())
+
+    upload_directory = isolated_storage.storage_path / "uploads"
+    assert list(upload_directory.iterdir()) == []
+    assert storage.list_documents() == []
