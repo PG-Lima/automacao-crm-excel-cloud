@@ -4,6 +4,8 @@
 
 **Guia de aprendizagem:** [consulte o roteiro de estudo](learning-guide.md).
 
+**Garantia de qualidade:** [consulte a estratégia e a execução dos testes](quality-assurance.md).
+
 ## 1. Visão geral
 
 O projeto `automacao-crm-excel-cloud` demonstra um processo de automação web desenvolvido em Python, utilizando Playwright para controlar um navegador e interagir com duas aplicações web independentes.
