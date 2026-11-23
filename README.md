@@ -333,6 +333,10 @@ automacao-crm-excel-cloud/
 │       ├── currency.py
 │       ├── localization.py
 │       └── logging_config.py
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture.en.md
