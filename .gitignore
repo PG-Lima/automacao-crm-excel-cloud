@@ -57,3 +57,8 @@ Thumbs.db
 
 # Navegadores do Playwright
 .playwright-browsers/
+
+# Cobertura de testes
+.coverage
+.coverage.*
+htmlcov/
