@@ -81,11 +81,12 @@ Antes da publicação, será realizada uma revisão dos arquivos efetivamente pr
 
 ## 5. Segurança dos logs
 
-**Status: Parcialmente implementado**
+**Status: Implementado**
 
-O projeto possui um módulo de configuração de logs em `logging_config.py`.
+O módulo `logging_config.py` é integrado ao orquestrador de automação. Cada execução registra o início, as etapas do fluxo, o resultado do upload e a conclusão. Falhas são registradas pelo tipo de exceção, sem gravar a mensagem bruta da exceção.
 
-Entretanto, a integração desse módulo ao fluxo principal de automação ainda está pendente.
+Os registros são exibidos no terminal e gravados em `logs/automation.log`, com rotação configurada por tamanho e retenção de arquivos de backup.
+
 
 Diretrizes para os registros:
 
@@ -96,12 +97,12 @@ Diretrizes para os registros:
 - Não registrar dados pessoais ou informações confidenciais.
 - Não registrar o conteúdo integral dos relatórios.
 
-Melhorias planejadas:
+Controles implementados:
 
-- Integrar o módulo de logs ao orquestrador.
-- Padronizar os registros das etapas.
-- Registrar erros sem expor informações sensíveis.
-- Implementar rotação e limite de armazenamento dos arquivos de log.
+- Registro padronizado das etapas do robô.
+- Registro do tipo da falha sem copiar mensagens potencialmente sensíveis.
+- Rotação automática dos arquivos de log e limite de armazenamento.
+- Teste E2E que verifica o arquivo de log e confirma que as senhas demonstrativas não aparecem nele.
 
 ## 6. Segurança da automação do navegador
 
@@ -269,8 +270,8 @@ As medidas implementadas não representam certificação de segurança nem garan
 
 - [ ] Proteção CSRF nos formulários.
 - [ ] Limitação de tentativas de autenticação.
-- [ ] Integração completa dos logs.
-- [ ] Rotação de logs.
+- [x] Integração dos logs ao orquestrador.
+- [x] Rotação e limite de armazenamento dos logs.
 - [x] Testes unitários, de integração e E2E com Chromium real.
 - [x] GitHub Actions executando testes, cobertura e Ruff.
 - [ ] Auditoria automatizada de vulnerabilidades das dependências.
