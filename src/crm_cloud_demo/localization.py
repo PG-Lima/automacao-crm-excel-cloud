@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from fastapi import Request
 from urllib.parse import urlsplit
+
+from fastapi import Request
 
 
 TRANSLATIONS = {
