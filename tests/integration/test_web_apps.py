@@ -308,3 +308,62 @@ def test_cloud_upload_rejects_corrupted_xlsx_files(cloud_client):
     dashboard = client.get(response.headers["location"])
     assert "Não foi possível validar a planilha Excel" in dashboard.text
     assert cloud_storage.list_documents() == []
+
+
+
+def test_crm_authenticated_login_page_redirects_and_logout_preserves_language(
+    crm_client,
+):
+    crm_client.get("/language/en?next_path=/login", follow_redirects=False)
+    login(crm_client, settings.crm_demo_username, settings.crm_demo_password)
+
+    login_page = crm_client.get("/login", follow_redirects=False)
+    assert login_page.status_code == 303
+    assert login_page.headers["location"] == "/"
+
+    logout = crm_client.post("/logout", follow_redirects=False)
+    assert logout.status_code == 303
+    assert logout.headers["location"] == "/login"
+
+    translated_login = crm_client.get("/login")
+    assert translated_login.status_code == 200
+    assert "Sign in" in translated_login.text
+
+
+def test_crm_report_download_redirects_when_user_is_not_authenticated(crm_client):
+    response = crm_client.get("/reports/download", follow_redirects=False)
+
+    assert response.status_code == 303
+    assert response.headers["location"] == "/login"
+
+
+def test_cloud_authenticated_login_page_redirects_and_logout_preserves_language(
+    cloud_client,
+):
+    client, _ = cloud_client
+    client.get("/language/en?next_path=/login", follow_redirects=False)
+    login(client, settings.cloud_demo_username, settings.cloud_demo_password)
+
+    login_page = client.get("/login", follow_redirects=False)
+    assert login_page.status_code == 303
+    assert login_page.headers["location"] == "/"
+
+    logout = client.post("/logout", follow_redirects=False)
+    assert logout.status_code == 303
+    assert logout.headers["location"] == "/login"
+
+    translated_login = client.get("/login")
+    assert translated_login.status_code == 200
+    assert "Sign in to the library" in translated_login.text
+
+
+def test_cloud_upload_redirects_when_user_is_not_authenticated(cloud_client):
+    client, _ = cloud_client
+    response = client.post(
+        "/upload",
+        files={"file": ("report.xlsx", make_xlsx_bytes(), "application/octet-stream")},
+        follow_redirects=False,
+    )
+
+    assert response.status_code == 303
+    assert response.headers["location"] == "/login"
