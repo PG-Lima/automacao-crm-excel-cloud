@@ -15,6 +15,7 @@ from openpyxl import load_workbook
 from crm_cloud_demo import config
 from crm_cloud_demo.apps.cloud import storage as cloud_storage
 from crm_cloud_demo.apps.crm import routes as crm_routes
+from crm_cloud_demo import logging_config
 from crm_cloud_demo.automation import cloud as automation_cloud
 from crm_cloud_demo.automation import crm as automation_crm
 from crm_cloud_demo.automation.run import run_automation
@@ -75,6 +76,7 @@ def test_real_playwright_workflow_moves_report_from_crm_to_cloud_library(
     monkeypatch.setattr(automation_crm, "settings", test_settings)
     monkeypatch.setattr(automation_cloud, "settings", test_settings)
     monkeypatch.setattr(automation_crm, "PROJECT_ROOT", tmp_path)
+    monkeypatch.setattr(logging_config, "PROJECT_ROOT", tmp_path)
 
     from crm_cloud_demo.apps.cloud.app import app as cloud_app
     from crm_cloud_demo.apps.crm.app import app as crm_app
@@ -107,6 +109,15 @@ def test_real_playwright_workflow_moves_report_from_crm_to_cloud_library(
         assert uploaded["sha256"] == hashlib.sha256(report_bytes).hexdigest()
         assert uploaded["version"] == 1
         assert uploaded["original_filename"] == downloads[0].name
+
+        log_file = tmp_path / "logs" / "automation.log"
+        log_content = log_file.read_text(encoding="utf-8")
+        assert "Iniciando automação." in log_content
+        assert "Login no CRM realizado." in log_content
+        assert "Login na biblioteca realizado." in log_content
+        assert "Automação finalizada com sucesso." in log_content
+        assert settings.crm_demo_password not in log_content
+        assert settings.cloud_demo_password not in log_content
     finally:
         for server, thread in reversed(running_servers):
             server.should_exit = True
