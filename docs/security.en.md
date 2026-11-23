@@ -228,6 +228,12 @@ Guidelines:
 
 Automated dependency vulnerability auditing is still pending.
 
+### External exchange-rate lookup
+
+The English interface calls the public endpoint `https://api.frankfurter.dev/v2/rate/brl/usd` to retrieve the BRL/USD reference rate. The request contains only the currency pair; it does not send CRM deal records, names, files, or credentials. The API does not require an authentication key. The application sets a five-second timeout and caches the rate for six hours. If no valid rate is available, USD amounts and the corresponding export are unavailable rather than being calculated with a hard-coded value.
+
+Frankfurter publishes reference rates, not real-time trading quotes. The Portuguese interface does not depend on this request and continues to display the original BRL amounts.
+
 ## 12. Usage limitations
 
 This project is intended exclusively for educational and demonstration purposes.
@@ -257,6 +263,7 @@ The implemented measures do not constitute a security certification and do not g
 - [x] File size and structure limits.
 - [x] Storage with unique identifiers.
 - [x] Version and hash records.
+- [x] External request limited to the BRL/USD rate, with no business data or credentials sent.
 
 ### Pending improvements
 
