@@ -58,7 +58,7 @@ Implementado em Python com Playwright. Controla o navegador Chromium, realiza lo
 | SQLite | Persistência de metadados e histórico de versões |
 | Jinja2 | Templates HTML |
 | python-dotenv | Carregamento de configurações por variáveis de ambiente |
-| pytest | Framework declarado para testes no ambiente de desenvolvimento |
+| pytest | Testes unitários para localização e exportação bilíngue do Excel |
 | Ruff | Análise e padronização do código |
 | Git | Controle de versão |
 
@@ -90,7 +90,8 @@ automacao-crm-excel-cloud/
 │       └── logging_config.py
 ├── tests/
 │   └── unit/
-│       └── test_localization.py
+│       ├── test_localization.py
+│       └── test_bilingual_report.py
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture.en.md
@@ -183,7 +184,7 @@ O robô utiliza as configurações definidas no arquivo `.env` para acessar as d
 
 ### Testes
 
-O `pytest` está declarado como dependência de desenvolvimento. O repositório já inclui testes unitários iniciais em `tests/unit/test_localization.py`, que verificam a seleção de idioma, as traduções e a validação dos caminhos de retorno. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+O `pytest` está declarado como dependência de desenvolvimento. O repositório inclui testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno e exportação de relatórios Excel em português e inglês. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 ### Segurança e escopo
 
@@ -278,7 +279,7 @@ Implemented in Python with Playwright. It controls the Chromium browser, logs in
 | SQLite | Metadata and document version-history persistence |
 | Jinja2 | HTML templates |
 | python-dotenv | Environment-based configuration loading |
-| pytest | Test framework declared for the development environment |
+| pytest | Unit tests for localization and bilingual Excel exports |
 | Ruff | Code linting and formatting checks |
 | Git | Version control |
 
@@ -397,7 +398,7 @@ The robot uses the settings defined in the `.env` file to access both applicatio
 
 ### Tests
 
-`pytest` is declared as a development dependency. The repository now includes initial unit tests in `tests/unit/test_localization.py`, covering language selection, translations, and safe return-path validation. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+`pytest` is declared as a development dependency. The repository includes unit tests in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report exports in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 ### Security and scope
 
