@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import runpy
 from contextlib import asynccontextmanager
 from pathlib import Path
-import runpy
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 
