@@ -186,6 +186,12 @@ O robô utiliza as configurações definidas no arquivo `.env` para acessar as d
 
 O `pytest` está declarado como dependência de desenvolvimento. O repositório inclui testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno e exportação de relatórios Excel em português e inglês. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
+Execute os testes com o ambiente virtual ativado:
+
+```powershell
+python -m pytest tests/unit -v
+```
+
 ### Segurança e escopo
 
 O projeto é uma simulação local e independente. Entre as medidas documentadas estão:
@@ -399,6 +405,12 @@ The robot uses the settings defined in the `.env` file to access both applicatio
 ### Tests
 
 `pytest` is declared as a development dependency. The repository includes unit tests in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report exports in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+
+Run the tests with the virtual environment activated:
+
+```powershell
+python -m pytest tests/unit -v
+```
 
 ### Security and scope
 
