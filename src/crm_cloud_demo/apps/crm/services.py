@@ -124,7 +124,10 @@ def create_excel_report(
     is_english = language == "en"
 
     if is_english and (
-        exchange_rate is None or rate_date is None or exchange_rate <= 0
+        exchange_rate is None
+        or rate_date is None
+        or not exchange_rate.is_finite()
+        or exchange_rate <= 0
     ):
         raise ValueError("A valid BRL/USD exchange rate and date are required for English reports.")
 
@@ -221,9 +224,12 @@ def create_excel_report(
             [
                 "Total value (USD)",
                 float(
-                    convert_brl_to_usd(
-                        sum(record["valor"] for record in records),
-                        exchange_rate,
+                    sum(
+                        (
+                            convert_brl_to_usd(record["valor"], exchange_rate)
+                            for record in records
+                        ),
+                        start=Decimal("0.00"),
                     )
                 ),
             ]
