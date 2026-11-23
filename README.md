@@ -182,7 +182,7 @@ python -m crm_cloud_demo.automation.run
 
 O robô utiliza as configurações definidas no arquivo `.env` para acessar as duas aplicações.
 
-**Idioma e moeda:** nas telas de login e nos painéis do CRM e da Cloud Library, utilize o seletor `PT-BR / EN` para alternar o idioma. Cada aplicação mantém sua própria preferência durante a sessão. No modo PT-BR, os valores são exibidos em BRL. No modo EN, os valores são convertidos de BRL para USD usando a taxa de referência mais recente consultada na API Frankfurter; a data da taxa e a fonte são informadas no painel e no Excel. Os registros originais continuam armazenados em BRL.
+**Idioma e moeda:** nas telas de login e nos painéis do CRM e da Cloud Library, utilize o seletor `PT-BR / EN` para alternar o idioma. Cada aplicação mantém sua própria preferência durante a sessão. No modo PT-BR, os valores são exibidos em BRL. No modo EN, os valores são convertidos de BRL para USD usando a taxa de referência mais recente consultada na API Frankfurter; a data da taxa e a fonte são informadas no painel e no Excel. Os registros originais continuam armazenados em BRL. A versão inglesa precisa de conexão com a internet para consultar a taxa; se a API estiver indisponível, a tela sinaliza o problema em vez de exibir uma conversão inventada.
 
 ### Testes
 
@@ -405,7 +405,7 @@ python -m crm_cloud_demo.automation.run
 
 The robot uses the settings defined in the `.env` file to access both applications.
 
-**Language and currency:** use the `PT-BR / EN` selector on the CRM and Cloud Library login pages and dashboards to switch languages. Each application keeps its own preference during the session. In PT-BR mode, amounts are displayed in BRL. In EN mode, amounts are converted from BRL to USD using the latest reference rate retrieved from the Frankfurter API; the rate date and source are shown in the dashboard and Excel report. Original records remain stored in BRL.
+**Language and currency:** use the `PT-BR / EN` selector on the CRM and Cloud Library login pages and dashboards to switch languages. Each application keeps its own preference during the session. In PT-BR mode, amounts are displayed in BRL. In EN mode, amounts are converted from BRL to USD using the latest reference rate retrieved from the Frankfurter API; the rate date and source are shown in the dashboard and Excel report. Original records remain stored in BRL. The English version needs an internet connection to retrieve the rate; if the API is unavailable, the interface reports the issue instead of showing an invented conversion.
 
 ### Tests
 
