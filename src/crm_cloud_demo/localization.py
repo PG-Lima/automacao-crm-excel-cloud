@@ -228,10 +228,13 @@ def translate_error(message: str, language: str) -> str:
 
 
 def safe_next_path(next_path: str | None, fallback: str = "/") -> str:
-    if not next_path:
+    if not next_path or any(ord(char) < 32 or ord(char) == 127 for char in next_path):
         return fallback
 
-    parsed = urlsplit(next_path)
+    try:
+        parsed = urlsplit(next_path)
+    except ValueError:
+        return fallback
 
     if (
         parsed.scheme
