@@ -99,3 +99,14 @@ def test_load_settings_builds_paths_and_reads_values(monkeypatch, tmp_path):
     assert settings.database_path == tmp_path / "storage" / "db.sqlite"
     assert settings.report_default_days == 45
     assert settings.playwright_headless is False
+
+
+
+def test_load_settings_requires_cloud_credentials_after_crm_is_configured(monkeypatch):
+    monkeypatch.setenv("CRM_DEMO_USERNAME", "crm-demo")
+    monkeypatch.setenv("CRM_DEMO_PASSWORD", "crm-demo-password")
+    monkeypatch.delenv("CLOUD_DEMO_USERNAME", raising=False)
+    monkeypatch.delenv("CLOUD_DEMO_PASSWORD", raising=False)
+
+    with pytest.raises(ValueError, match="credenciais demonstrativas da biblioteca"):
+        config.load_settings()
