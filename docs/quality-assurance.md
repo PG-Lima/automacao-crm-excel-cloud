@@ -104,3 +104,21 @@ A cobertura é uma evidência útil, mas deve ser analisada junto com os cenári
 - A suíte não constitui uma certificação de segurança nem substitui revisão independente.
 
 O resultado deve ser apresentado como validação automatizada de uma demonstração independente e educacional.
+
+
+## 7. Evidência da última execução
+
+**Execução verificada em 23 de novembro de 2026:** [GitHub Actions — execução 45234968343](https://github.com/PG-Lima/automacao-crm-excel-cloud/actions/runs/45234968343).
+
+| Verificação | Resultado |
+|---|---:|
+| Testes unitários, integração e E2E | 111 aprovados |
+| Instruções executáveis do pacote | 634 |
+| Instruções não cobertas | 0 |
+| Cobertura de linhas do pacote | 100% |
+| Verificação Ruff | Aprovada |
+| Fluxo real com Chromium e Playwright | Aprovado |
+
+O ambiente de CI utilizou Python 3.14. A execução confirmou o fluxo de autenticação, download, upload, persistência, hash, versionamento e registro em log, além dos cenários unitários e de integração.
+
+Esse resultado é uma fotografia da execução indicada. Novos commits continuam sendo revalidados automaticamente pela pipeline.
