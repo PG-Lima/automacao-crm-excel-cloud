@@ -69,7 +69,9 @@ The project uses three local processes:
 
 Start both applications and open their pages in a browser first. Then run the robot and observe the workflow.
 
-**Goal:** recognize that the CRM, Cloud Library, and automation are separate components.
+On the login pages and dashboards, try the `PT-BR / EN` selector. Each application keeps its own language preference. In the CRM, generate a report in each language and compare the spreadsheet headers, deal stages, and summary.
+
+**Goal:** recognize that the CRM, Cloud Library, and automation are separate components, and observe how localization changes the interface without changing the automation workflow.
 
 ### Step 3 — Follow the robot's execution path
 
@@ -141,7 +143,7 @@ A success message alone is not enough. Think about evidence for each step:
 - Did the Cloud Library display a confirmation?
 - Does the document appear in the history with the expected version and metadata?
 
-**Test status in the repository:** the currently published version declares pytest as a development dependency, but does not yet contain the automated test directory. Do not confuse an installed dependency with a published test suite. Check project updates for the tests and their corresponding code.
+**Test status in the repository:** an initial unit test file is available at `tests/unit/test_localization.py`. It covers language selection, translations, and safe return-path validation. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 ### Step 7 — Think about adapting the solution
 
