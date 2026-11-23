@@ -9,6 +9,12 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from crm_cloud_demo.config import settings
+from crm_cloud_demo.localization import (
+    get_language,
+    safe_next_path,
+    template_context,
+    translate_error,
+)
 
 from .services import create_excel_report, get_deals
 
@@ -45,6 +51,12 @@ def _parse_date_range(
     return start, end
 
 
+@router.get("/language/{language}")
+async def switch_language(request: Request, language: str, next_path: str = "/"):
+    request.session["language"] = language if language in {"pt", "en"} else "pt"
+    return RedirectResponse(safe_next_path(next_path), status_code=303)
+
+
 @router.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     if _is_authenticated(request):
@@ -53,7 +65,7 @@ async def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="login.html",
-        context={"error": None},
+        context=template_context(request, error=None),
     )
 
 
@@ -77,7 +89,7 @@ async def login(
         return templates.TemplateResponse(
             request=request,
             name="login.html",
-            context={"error": "Usuário ou senha inválidos."},
+            context=template_context(request, error=template_context(request)["t"]["invalid_credentials"]),
             status_code=401,
         )
 
@@ -104,15 +116,16 @@ async def dashboard(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="dashboard.html",
-        context={
-            "username": request.session["username"],
-            "deals": deals,
-            "total_deals": len(deals),
-            "total_value": sum(deal["valor"] for deal in deals),
-            "start_date": start_date.isoformat(),
-            "end_date": end_date.isoformat(),
-            "error": None,
-        },
+        context=template_context(
+            request,
+            username=request.session["username"],
+            deals=deals,
+            total_deals=len(deals),
+            total_value=sum(deal["valor"] for deal in deals),
+            start_date=start_date.isoformat(),
+            end_date=end_date.isoformat(),
+            error=None,
+        ),
     )
 
 
@@ -128,7 +141,7 @@ async def download_report(
     try:
         start, end = _parse_date_range(start_date, end_date)
     except ValueError as exc:
-        return HTMLResponse(str(exc), status_code=400)
+        return HTMLResponse(translate_error(str(exc), get_language(request)), status_code=400)
 
     deals = get_deals(start, end)
     report = create_excel_report(deals, start, end)
