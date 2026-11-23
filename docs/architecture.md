@@ -219,11 +219,11 @@ As etapas concluídas incluem:
 
 Próximas melhorias:
 
-- Ampliação dos testes unitários e implementação de testes de integração para os fluxos completos.
-- Validação independente do relatório após o download.
-- Integração do sistema de logs ao orquestrador.
-- Aprimoramento do tratamento de falhas.
-- Execução programada pelo Agendador de Tarefas do Windows.
+- Integrar o módulo de logging ao orquestrador para registrar as etapas da execução.
+- Validar independentemente o conteúdo do relatório baixado antes do upload.
+- Ampliar a observabilidade e padronizar o tratamento de falhas.
+- Avaliar a execução programada pelo Agendador de Tarefas do Windows.
+- Avaliar uma implantação demonstrativa pública com controles adicionais, sem utilizar dados reais.
 - Ampliação da documentação e auditoria de segurança.
 
 ## 10. Considerações finais
