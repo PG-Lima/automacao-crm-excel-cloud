@@ -128,3 +128,9 @@ def test_conversion_rejects_non_finite_amounts_and_rates():
 
     with pytest.raises(ValueError):
         convert_brl_to_usd(100, Decimal("Infinity"))
+
+
+
+def test_conversion_rejects_non_numeric_amounts():
+    with pytest.raises(ValueError, match="must be numeric"):
+        convert_brl_to_usd("not-a-number", Decimal("0.2"))
