@@ -163,7 +163,11 @@ def create_excel_report(
     }
 
     for record in records:
-        stage = stage_labels.get(record["etapa"], record["etapa"]) if is_english else record["etapa"]
+        stage = (
+            stage_labels.get(record["etapa"], record["etapa"])
+            if is_english
+            else record["etapa"]
+        )
         sheet.append(
             [
                 record["id"],
