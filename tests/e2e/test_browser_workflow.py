@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import logging
 import socket
 import threading
 import time
@@ -122,3 +123,9 @@ def test_real_playwright_workflow_moves_report_from_crm_to_cloud_library(
         for server, thread in reversed(running_servers):
             server.should_exit = True
             thread.join(timeout=15)
+
+        logger = logging.getLogger(logging_config.LOGGER_NAME)
+        for handler in list(logger.handlers):
+            logger.removeHandler(handler)
+            handler.close()
+        logger.propagate = True
