@@ -180,11 +180,11 @@ python -m crm_cloud_demo.automation.run
 
 O robô utiliza as configurações definidas no arquivo `.env` para acessar as duas aplicações.
 
-**Idioma:** nas telas de login e nos painéis do CRM e da Cloud Library, utilize o seletor `PT-BR / EN` para alternar o idioma. Cada aplicação mantém sua própria preferência durante a sessão. O relatório Excel do CRM também acompanha o idioma selecionado.
+**Idioma e moeda:** nas telas de login e nos painéis do CRM e da Cloud Library, utilize o seletor `PT-BR / EN` para alternar o idioma. Cada aplicação mantém sua própria preferência durante a sessão. No modo PT-BR, os valores são exibidos em BRL. No modo EN, os valores são convertidos de BRL para USD usando a taxa de referência mais recente consultada na API Frankfurter; a data da taxa e a fonte são informadas no painel e no Excel. Os registros originais continuam armazenados em BRL.
 
 ### Testes
 
-O `pytest` está declarado como dependência de desenvolvimento. O repositório inclui testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno e exportação de relatórios Excel em português e inglês. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+O `pytest` está declarado como dependência de desenvolvimento. O repositório inclui testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno, conversão BRL/USD, cache da taxa e exportação de relatórios Excel em português e inglês. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 Execute os testes com o ambiente virtual ativado:
 
@@ -400,11 +400,11 @@ python -m crm_cloud_demo.automation.run
 
 The robot uses the settings defined in the `.env` file to access both applications.
 
-**Language:** use the `PT-BR / EN` selector on the CRM and Cloud Library login pages and dashboards to switch languages. Each application keeps its own preference during the session. The CRM Excel report also follows the selected language.
+**Language and currency:** use the `PT-BR / EN` selector on the CRM and Cloud Library login pages and dashboards to switch languages. Each application keeps its own preference during the session. In PT-BR mode, amounts are displayed in BRL. In EN mode, amounts are converted from BRL to USD using the latest reference rate retrieved from the Frankfurter API; the rate date and source are shown in the dashboard and Excel report. Original records remain stored in BRL.
 
 ### Tests
 
-`pytest` is declared as a development dependency. The repository includes unit tests in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report exports in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+`pytest` is declared as a development dependency. The repository includes unit tests in `tests/unit/` for language selection, translations, safe return-path validation, BRL/USD conversion, rate caching, and Excel report exports in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 Run the tests with the virtual environment activated:
 
