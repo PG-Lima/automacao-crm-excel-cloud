@@ -231,7 +231,7 @@ O guia também indica o que observar no código e quais perguntas você deve con
 
 A funcionalidade principal, a automação com navegador e os testes unitários, de integração e E2E já estão implementados. As evoluções seguintes não bloqueiam a demonstração acadêmica atual:
 
-- Integrar o módulo de logs ao orquestrador e padronizar os registros de cada etapa.
+- Aprimorar a observabilidade do logging com métricas e relatórios estruturados de execução.
 - Validar o conteúdo do arquivo baixado antes de iniciar o upload.
 - Adicionar proteção CSRF e limitação de tentativas de autenticação antes de qualquer exposição pública.
 - Adicionar evidências visuais, relatório de execução e instruções de demonstração para a apresentação do TCC.
@@ -463,7 +463,7 @@ The guide also points to the code areas to inspect and the questions you should 
 
 The core functionality, browser automation, and unit, integration, and end-to-end tests are implemented. The following improvements do not block the current academic demonstration:
 
-- Integrate the logging module with the orchestrator and standardize workflow-stage records.
+- Improve logging observability with metrics and structured execution reports.
 - Validate the downloaded file contents before starting the upload.
 - Add CSRF protection and authentication-attempt rate limiting before any public exposure.
 - Add visual evidence, an execution report, and demonstration instructions for the TCC presentation.
