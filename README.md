@@ -55,10 +55,11 @@ Implementado em Python com Playwright. Controla o navegador Chromium, realiza lo
 | FastAPI | Desenvolvimento das aplicações web |
 | Uvicorn | Servidor ASGI |
 | openpyxl | Geração e manipulação de arquivos Excel |
+| Frankfurter API | Taxa de referência para conversão BRL/USD na interface inglesa |
 | SQLite | Persistência de metadados e histórico de versões |
 | Jinja2 | Templates HTML |
 | python-dotenv | Carregamento de configurações por variáveis de ambiente |
-| pytest | Testes unitários para localização e exportação bilíngue do Excel |
+| pytest | Testes unitários para localização, conversão BRL/USD e exportação do Excel |
 | Ruff | Análise e padronização do código |
 | Git | Controle de versão |
 
@@ -86,6 +87,7 @@ automacao-crm-excel-cloud/
 │       │   └── run.py
 │       ├── services/
 │       ├── config.py
+│       ├── currency.py
 │       ├── localization.py
 │       └── logging_config.py
 ├── tests/
@@ -282,10 +284,11 @@ Implemented in Python with Playwright. It controls the Chromium browser, logs in
 | FastAPI | Web application development |
 | Uvicorn | ASGI server |
 | openpyxl | Excel file generation and manipulation |
+| Frankfurter API | Reference rate for BRL/USD conversion in the English interface |
 | SQLite | Metadata and document version-history persistence |
 | Jinja2 | HTML templates |
 | python-dotenv | Environment-based configuration loading |
-| pytest | Unit tests for localization and bilingual Excel exports |
+| pytest | Unit tests for localization, BRL/USD conversion, and Excel exports |
 | Ruff | Code linting and formatting checks |
 | Git | Version control |
 
@@ -313,6 +316,8 @@ automacao-crm-excel-cloud/
 │       │   └── run.py
 │       ├── services/
 │       ├── config.py
+│       ├── currency.py
+│       ├── localization.py
 │       └── logging_config.py
 ├── docs/
 │   ├── architecture.md
