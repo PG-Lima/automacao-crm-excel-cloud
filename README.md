@@ -59,7 +59,7 @@ Implementado em Python com Playwright. Controla o navegador Chromium, realiza lo
 | SQLite | Persistência de metadados e histórico de versões |
 | Jinja2 | Templates HTML |
 | python-dotenv | Carregamento de configurações por variáveis de ambiente |
-| pytest | Testes unitários para localização, conversão BRL/USD e exportação do Excel |
+| pytest / pytest-cov | Testes unitários, integração e E2E com relatório de cobertura |
 | Ruff | Análise e padronização do código |
 | Git | Controle de versão |
 
@@ -229,13 +229,14 @@ O guia também indica o que observar no código e quais perguntas você deve con
 
 ### Próximas melhorias
 
-- Ampliar os tutoriais com explicações guiadas dos módulos e funções do código.
-- Publicar e manter a suíte de testes unitários e de integração no repositório.
-- Aprimorar o tratamento de exceções e falhas.
-- Integrar o módulo de logs ao fluxo principal.
-- Adicionar evidências visuais e relatórios estruturados de execução.
+A funcionalidade principal, a automação com navegador e os testes unitários, de integração e E2E já estão implementados. As evoluções seguintes não bloqueiam a demonstração acadêmica atual:
+
+- Integrar o módulo de logs ao orquestrador e padronizar os registros de cada etapa.
+- Validar o conteúdo do arquivo baixado antes de iniciar o upload.
+- Adicionar proteção CSRF e limitação de tentativas de autenticação antes de qualquer exposição pública.
+- Adicionar evidências visuais, relatório de execução e instruções de demonstração para a apresentação do TCC.
 - Avaliar a execução programada pelo Agendador de Tarefas do Windows.
-- Continuar a revisão de segurança e documentação.
+- Definir uma licença de uso para orientar a reutilização do código por outras pessoas.
 
 ### Dois objetivos, a mesma importância
 
@@ -301,7 +302,7 @@ Implemented in Python with Playwright. It controls the Chromium browser, logs in
 | SQLite | Metadata and document version-history persistence |
 | Jinja2 | HTML templates |
 | python-dotenv | Environment-based configuration loading |
-| pytest | Unit tests for localization, BRL/USD conversion, and Excel exports |
+| pytest / pytest-cov | Unit, integration, and browser end-to-end tests with coverage reporting |
 | Ruff | Code linting and formatting checks |
 | Git | Version control |
 
@@ -458,15 +459,16 @@ The goal is to help you understand the reasoning behind the implementation, not 
 
 The guide also points to the code areas to inspect and the questions you should be able to answer at the end of each stage.
 
-### Planned improvements
+### Next improvements
 
-- Expand the tutorials with guided explanations of code modules and functions.
-- Publish and maintain the unit and integration test suite in the repository.
-- Improve exception and failure handling.
-- Integrate the logging module into the main workflow.
-- Add visual evidence and structured execution reports.
+The core functionality, browser automation, and unit, integration, and end-to-end tests are implemented. The following improvements do not block the current academic demonstration:
+
+- Integrate the logging module with the orchestrator and standardize workflow-stage records.
+- Validate the downloaded file contents before starting the upload.
+- Add CSRF protection and authentication-attempt rate limiting before any public exposure.
+- Add visual evidence, an execution report, and demonstration instructions for the TCC presentation.
 - Evaluate scheduled execution through Windows Task Scheduler.
-- Continue security and documentation reviews.
+- Choose a software license to clarify how others may reuse the code.
 
 ### Two equally important goals
 
