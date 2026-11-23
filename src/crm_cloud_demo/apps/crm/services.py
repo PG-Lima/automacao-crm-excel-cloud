@@ -4,11 +4,11 @@ from datetime import date, timedelta
 from decimal import Decimal
 from io import BytesIO
 
-from crm_cloud_demo.currency import convert_brl_to_usd
-
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
+
+from crm_cloud_demo.currency import convert_brl_to_usd
 
 
 def _build_demo_records() -> list[dict]:
