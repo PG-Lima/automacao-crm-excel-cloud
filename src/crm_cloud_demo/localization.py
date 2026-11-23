@@ -8,6 +8,7 @@ from fastapi import Request
 TRANSLATIONS = {
     "pt": {
         "html_lang": "pt-BR",
+        "language_selector": "Idioma",
         "currency_prefix": "R$",
         "crm_login_title": "CRM Demo | Entrar",
         "crm_brand_subtitle": "Sistema de Gestão Comercial",
@@ -87,6 +88,7 @@ TRANSLATIONS = {
     },
     "en": {
         "html_lang": "en",
+        "language_selector": "Language",
         "currency_prefix": "BRL",
         "crm_login_title": "CRM Demo | Sign in",
         "crm_brand_subtitle": "Sales Management System",
