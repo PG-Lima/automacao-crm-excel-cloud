@@ -4,6 +4,7 @@ import asyncio
 import secrets
 from datetime import date, timedelta
 from pathlib import Path
+from typing import Annotated
 
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
@@ -75,8 +76,8 @@ async def login_page(request: Request):
 @router.post("/login", response_class=HTMLResponse)
 async def login(
     request: Request,
-    username: str = Form(...),
-    password: str = Form(...),
+    username: Annotated[str, Form()],
+    password: Annotated[str, Form()],
 ):
     valid_username = secrets.compare_digest(
         username.strip(),
