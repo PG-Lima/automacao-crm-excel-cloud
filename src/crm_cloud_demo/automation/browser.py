@@ -10,14 +10,18 @@ from crm_cloud_demo.config import settings
 async def browser_session() -> AsyncIterator[Page]:
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch(headless=settings.playwright_headless)
-
-        context = await browser.new_context(accept_downloads=True)
-
-        page = await context.new_page()
-        page.set_default_timeout(settings.automation_timeout)
+        context = None
 
         try:
+            context = await browser.new_context(accept_downloads=True)
+            page = await context.new_page()
+            page.set_default_timeout(settings.automation_timeout)
+
             yield page
+
         finally:
-            await context.close()
-            await browser.close()
+            try:
+                if context is not None:
+                    await context.close()
+            finally:
+                await browser.close()
