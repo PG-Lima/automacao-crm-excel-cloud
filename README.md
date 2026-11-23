@@ -1,5 +1,7 @@
 # CRM → Excel → Cloud Automation | Automação CRM → Excel → Cloud
 
+[![CI](https://github.com/PG-Lima/automacao-crm-excel-cloud/actions/workflows/ci.yml/badge.svg)](https://github.com/PG-Lima/automacao-crm-excel-cloud/actions/workflows/ci.yml)
+
 🇧🇷 **Desenvolvido de forma independente no Brasil.**  
 🌎 **Independently developed in Brazil.**
 
