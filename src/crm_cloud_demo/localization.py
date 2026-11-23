@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from urllib.parse import urlsplit
+
 from fastapi import Request
 
 
@@ -220,6 +222,18 @@ def translate_error(message: str, language: str) -> str:
 
 
 def safe_next_path(next_path: str | None, fallback: str = "/") -> str:
-    if not next_path or not next_path.startswith("/") or next_path.startswith("//"):
+    if not next_path:
         return fallback
+
+    parsed = urlsplit(next_path)
+
+    if (
+        parsed.scheme
+        or parsed.netloc
+        or not parsed.path.startswith("/")
+        or parsed.path.startswith("//")
+        or "\\" in parsed.path
+    ):
+        return fallback
+
     return next_path
