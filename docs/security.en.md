@@ -264,7 +264,8 @@ The implemented measures do not constitute a security certification and do not g
 - [ ] Authentication-attempt rate limiting.
 - [ ] Full logging integration.
 - [ ] Log rotation.
-- [ ] Unit and integration tests in the published repository.
+- [x] Initial unit tests for localization and Excel report exports.
+- [ ] Expanded test coverage and integration tests.
 - [ ] Automated dependency auditing.
 - [ ] Final review of files staged for publication.
 
