@@ -53,8 +53,8 @@ async def login_page(request: Request):
 @router.post("/login", response_class=HTMLResponse)
 async def login(
     request: Request,
-    username: str = Form(...),
-    password: str = Form(...),
+    username: Annotated[str, Form()],
+    password: Annotated[str, Form()],
 ):
     from crm_cloud_demo.config import settings
 
