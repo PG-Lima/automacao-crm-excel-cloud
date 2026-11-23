@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from datetime import date, timedelta
+from decimal import Decimal
 from io import BytesIO
+
+from crm_cloud_demo.currency import convert_brl_to_usd
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
@@ -115,8 +118,16 @@ def create_excel_report(
     start_date: date,
     end_date: date,
     language: str = "pt",
+    exchange_rate: Decimal | None = None,
+    rate_date: date | None = None,
 ) -> BytesIO:
     is_english = language == "en"
+
+    if is_english and (
+        exchange_rate is None or rate_date is None or exchange_rate <= 0
+    ):
+        raise ValueError("A valid BRL/USD exchange rate and date are required for English reports.")
+
     workbook = Workbook()
 
     sheet = workbook.active
@@ -128,7 +139,7 @@ def create_excel_report(
             "Company",
             "Owner",
             "Stage",
-            "Amount (BRL)",
+            "Amount (USD)",
             "Entry date",
         ]
         if is_english
@@ -174,14 +185,18 @@ def create_excel_report(
                 record["empresa"],
                 record["responsavel"],
                 stage,
-                record["valor"],
+                (
+                    float(convert_brl_to_usd(record["valor"], exchange_rate))
+                    if is_english and exchange_rate is not None
+                    else record["valor"]
+                ),
                 record["data"],
             ]
         )
 
     for row in range(2, sheet.max_row + 1):
         sheet.cell(row=row, column=5).number_format = (
-            '"BRL" #,##0.00' if is_english else "R$ #,##0.00"
+            '"USD" #,##0.00' if is_english else "R$ #,##0.00"
         )
         sheet.cell(row=row, column=6).number_format = (
             "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
@@ -204,10 +219,18 @@ def create_excel_report(
         summary.append(["Total deals", len(records)])
         summary.append(
             [
-                "Total value",
-                sum(record["valor"] for record in records),
+                "Total value (USD)",
+                float(
+                    convert_brl_to_usd(
+                        sum(record["valor"] for record in records),
+                        exchange_rate,
+                    )
+                ),
             ]
         )
+        summary.append(["Exchange rate (1 BRL to USD)", float(exchange_rate)])
+        summary.append(["Rate date", rate_date])
+        summary.append(["Rate source", "Frankfurter"])
     else:
         summary.append(["RELATÓRIO CRM - DEMONSTRAÇÃO"])
         summary.append(["Período inicial", start_date])
@@ -221,7 +244,10 @@ def create_excel_report(
         )
 
     summary["A1"].font = Font(bold=True, size=14, color="243B53")
-    summary["B5"].number_format = '"BRL" #,##0.00' if is_english else "R$ #,##0.00"
+    summary["B5"].number_format = '"USD" #,##0.00' if is_english else "R$ #,##0.00"
+    if is_english:
+        summary["B6"].number_format = '0.000000 "USD per BRL"'
+        summary["B7"].number_format = "MM/DD/YYYY"
     summary["B2"].number_format = "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
     summary["B3"].number_format = "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
     summary.column_dimensions["A"].width = 30
