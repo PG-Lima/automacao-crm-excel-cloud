@@ -148,13 +148,20 @@ A success message alone is not enough. Think about evidence for each step:
 - Did the Cloud Library display a confirmation?
 - Does the document appear in the history with the expected version and metadata?
 
-**Test status in the repository:** unit tests are available in `tests/unit/` for language selection, translations, safe return-path validation, BRL/USD conversion, rate caching, and Excel report generation in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+**Test status in the repository:** tests are organized into three levels:
 
-To run the published tests, activate the virtual environment and execute:
+- `tests/unit/`: validates isolated configuration, localization, currency conversion, Excel, storage, logging, and automation functions.
+- `tests/integration/`: sends HTTP requests to the CRM and Cloud Library to verify authentication, routes, exports, uploads, and persistence.
+- `tests/e2e/`: starts both servers, launches real Chromium through Playwright, and runs the complete automation workflow, verifying the downloaded file and SQLite record.
+
+With the virtual environment activated and Chromium installed in the path configured by the project, run:
 
 ```powershell
-python -m pytest tests/unit -v
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m ruff check src tests
 ```
+
+Coverage measures exercised lines; it is not a quality score. Read the test scenarios as well to understand which behaviors and failure cases are being checked.
 
 ### Step 7 — Think about adapting the solution
 
