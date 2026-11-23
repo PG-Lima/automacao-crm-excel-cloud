@@ -35,6 +35,9 @@ include = ["crm_cloud_demo*"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "-ra"
+markers = [
+    "e2e: full browser workflow requiring a Playwright Chromium installation",
+]
 
 [tool.ruff]
 line-length = 100
