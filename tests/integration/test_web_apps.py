@@ -4,15 +4,16 @@ from dataclasses import replace
 from datetime import date, timedelta
 from decimal import Decimal
 from io import BytesIO
+from urllib.parse import parse_qs, urlsplit
 
 import pytest
 from fastapi.testclient import TestClient
 from openpyxl import Workbook, load_workbook
 
-from crm_cloud_demo.config import settings
-from crm_cloud_demo.currency import ExchangeRate, ExchangeRateError
 from crm_cloud_demo.apps.cloud import storage as cloud_storage
 from crm_cloud_demo.apps.crm import routes as crm_routes
+from crm_cloud_demo.config import settings
+from crm_cloud_demo.currency import ExchangeRate, ExchangeRateError
 
 
 @pytest.fixture
@@ -230,7 +231,7 @@ def test_cloud_rejects_invalid_credentials(cloud_client):
         data={"username": "wrong", "password": "wrong"},
     )
     assert response.status_code == 401
-    assert "Invalid username or password" in response.text
+    assert "Usuário ou senha inválidos" in response.text
 
 
 def test_cloud_upload_persists_file_hash_and_version_history(cloud_client):
@@ -268,7 +269,8 @@ def test_cloud_upload_persists_file_hash_and_version_history(cloud_client):
         follow_redirects=False,
     )
     assert second.status_code == 303
-    assert "Version+2" in second.headers["location"] or "Version%202" in second.headers["location"]
+    success_message = parse_qs(urlsplit(second.headers["location"]).query)["success"][0]
+    assert success_message == "Upload concluído. Versão 2"
 
     stored = cloud_storage.list_documents()
     assert len(stored) == 2
