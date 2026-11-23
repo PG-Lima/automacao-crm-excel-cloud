@@ -81,11 +81,12 @@ Before publication, the files staged for the commit should be reviewed.
 
 ## 5. Log security
 
-**Status: Partially implemented**
+**Status: Implemented**
 
-The project has a logging configuration module in `logging_config.py`.
+The `logging_config.py` module is integrated with the automation orchestrator. Each run records its start, workflow stages, upload result, and completion. Failures are logged by exception type without recording the raw exception message.
 
-However, integration of this module into the main automation workflow is still pending.
+Records are written to the terminal and to `logs/automation.log`, with size-based rotation and retained backup files.
+
 
 Logging guidelines:
 
@@ -96,12 +97,12 @@ Logging guidelines:
 - Do not log personal data or confidential information.
 - Do not log the full contents of reports.
 
-Planned improvements:
+Implemented controls:
 
-- Integrate the logging module with the orchestrator.
-- Standardize workflow log entries.
-- Record errors without exposing sensitive information.
-- Implement rotation and storage limits for log files.
+- Standardized records for each automation stage.
+- Failure records include the exception type without copying potentially sensitive messages.
+- Automatic log rotation and storage limits.
+- An E2E test verifies the log file and confirms that demonstration passwords are not recorded.
 
 ## 6. Browser automation security
 
@@ -269,8 +270,8 @@ The implemented measures do not constitute a security certification and do not g
 
 - [ ] CSRF protection in forms.
 - [ ] Authentication-attempt rate limiting.
-- [ ] Full logging integration.
-- [ ] Log rotation.
+- [x] Logging integrated with the orchestrator.
+- [x] Log rotation and storage limits.
 - [x] Unit, integration, and E2E tests with real Chromium.
 - [x] GitHub Actions running tests, coverage, and Ruff.
 - [ ] Automated dependency vulnerability auditing.
