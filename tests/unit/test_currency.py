@@ -13,6 +13,7 @@ from crm_cloud_demo.currency import (
 
 def test_brl_to_usd_conversion_returns_two_decimal_places():
     assert convert_brl_to_usd(8700.50, Decimal("0.20")) == Decimal("1740.10")
+    assert convert_brl_to_usd(Decimal("1.025"), Decimal("1")) == Decimal("1.03")
 
 
 @pytest.mark.parametrize("rate", [Decimal("0"), Decimal("-0.1")])
