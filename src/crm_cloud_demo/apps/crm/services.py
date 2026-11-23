@@ -154,13 +154,22 @@ def create_excel_report(
         cell.fill = header_fill
         cell.alignment = Alignment(horizontal="center")
 
+    stage_labels = {
+        "Ganho": "Won",
+        "Em negociação": "In negotiation",
+        "Proposta enviada": "Proposal sent",
+        "Perdido": "Lost",
+        "Novo contato": "New lead",
+    }
+
     for record in records:
+        stage = stage_labels.get(record["etapa"], record["etapa"]) if is_english else record["etapa"]
         sheet.append(
             [
                 record["id"],
                 record["empresa"],
                 record["responsavel"],
-                record["etapa"],
+                stage,
                 record["valor"],
                 record["data"],
             ]
