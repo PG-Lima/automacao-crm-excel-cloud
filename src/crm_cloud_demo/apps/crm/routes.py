@@ -146,9 +146,14 @@ async def download_report(
         return HTMLResponse(translate_error(str(exc), get_language(request)), status_code=400)
 
     deals = get_deals(start, end)
-    report = create_excel_report(deals, start, end)
+    language = get_language(request)
 
-    filename = f"crm-relatorio-{start:%Y%m%d}-{end:%Y%m%d}.xlsx"
+    if language == "en":
+        report = create_excel_report(deals, start, end, language="en")
+        filename = f"crm-report-{start:%Y%m%d}-{end:%Y%m%d}.xlsx"
+    else:
+        report = create_excel_report(deals, start, end)
+        filename = f"crm-relatorio-{start:%Y%m%d}-{end:%Y%m%d}.xlsx"
 
     return Response(
         content=report.getvalue(),
