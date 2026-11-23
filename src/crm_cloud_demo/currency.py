@@ -12,7 +12,7 @@ from urllib.request import Request, urlopen
 
 RATE_URL = "https://api.frankfurter.dev/v2/rate/BRL/USD"
 RATE_SOURCE_NAME = "Frankfurter"
-RATE_CACHE_SECONDS = 6 * 60 * 60
+RATE_CACHE_SECONDS = 6 * 60 * 60  # Reference rates are refreshed a few times per business day.
 REQUEST_TIMEOUT_SECONDS = 5
 
 
@@ -50,7 +50,7 @@ def _fetch_brl_to_usd_rate() -> ExchangeRate:
 
     try:
         with urlopen(request, timeout=REQUEST_TIMEOUT_SECONDS) as response:
-            payload = json.loads(response.read().decode("utf-8"))
+            payload = json.loads(response.read().decode("utf-8"), parse_float=Decimal)
     except (HTTPError, URLError, TimeoutError, OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise ExchangeRateError(
             "The BRL/USD reference rate could not be retrieved."
