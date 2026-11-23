@@ -36,11 +36,11 @@ O projeto possui três componentes independentes:
 
 **1. CRM demonstrativo**
 
-Aplicação web desenvolvida com FastAPI. Disponibiliza autenticação local, dados comerciais fictícios, consulta de negociações por período e exportação de relatórios Excel.
+Aplicação web desenvolvida com FastAPI. Disponibiliza interface em português e inglês, autenticação local, dados comerciais fictícios, consulta de negociações por período e exportação de relatórios Excel no idioma selecionado.
 
 **2. Cloud Library**
 
-Aplicação web independente que simula uma biblioteca de documentos. Possui autenticação própria, recebe arquivos `.xlsx`, valida os documentos, armazena os arquivos localmente e registra metadados e histórico de versões em SQLite.
+Aplicação web independente que simula uma biblioteca de documentos. Possui interface em português e inglês, autenticação própria, recebe arquivos `.xlsx`, valida os documentos, armazena os arquivos localmente e registra metadados e histórico de versões em SQLite.
 
 **3. Robô de automação**
 
@@ -86,7 +86,11 @@ automacao-crm-excel-cloud/
 │       │   └── run.py
 │       ├── services/
 │       ├── config.py
+│       ├── localization.py
 │       └── logging_config.py
+├── tests/
+│   └── unit/
+│       └── test_localization.py
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture.en.md
@@ -175,9 +179,11 @@ python -m crm_cloud_demo.automation.run
 
 O robô utiliza as configurações definidas no arquivo `.env` para acessar as duas aplicações.
 
+**Idioma:** nas telas de login e nos painéis do CRM e da Cloud Library, utilize o seletor `PT-BR / EN` para alternar o idioma. Cada aplicação mantém sua própria preferência durante a sessão. O relatório Excel do CRM também acompanha o idioma selecionado.
+
 ### Testes
 
-O `pytest` está declarado como dependência de desenvolvimento. **A versão atualmente publicada neste repositório ainda não inclui os arquivos da suíte de testes automatizados.** A documentação do status dos testes deve acompanhar a publicação desses arquivos.
+O `pytest` está declarado como dependência de desenvolvimento. O repositório já inclui testes unitários iniciais em `tests/unit/test_localization.py`, que verificam a seleção de idioma, as traduções e a validação dos caminhos de retorno. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 ### Segurança e escopo
 
@@ -250,11 +256,11 @@ The project has three independent components:
 
 **1. Demo CRM**
 
-A web application built with FastAPI. It provides local authentication, fictional business data, date-based deal queries, and Excel report exports.
+A web application built with FastAPI. It provides a Portuguese and English interface, local authentication, fictional business data, date-based deal queries, and Excel report exports in the selected language.
 
 **2. Cloud Library**
 
-An independent web application that simulates a document library. It has its own authentication, accepts `.xlsx` files, validates documents, stores files locally, and records metadata and version history in SQLite.
+An independent web application that simulates a document library. It provides a Portuguese and English interface, its own authentication, accepts `.xlsx` files, validates documents, stores files locally, and records metadata and version history in SQLite.
 
 **3. Automation robot**
 
@@ -387,9 +393,11 @@ python -m crm_cloud_demo.automation.run
 
 The robot uses the settings defined in the `.env` file to access both applications.
 
+**Language:** use the `PT-BR / EN` selector on the CRM and Cloud Library login pages and dashboards to switch languages. Each application keeps its own preference during the session. The CRM Excel report also follows the selected language.
+
 ### Tests
 
-`pytest` is declared as a development dependency. **The version currently published in this repository does not yet include the automated test-suite files.** The test status documentation should be updated when those files are published.
+`pytest` is declared as a development dependency. The repository now includes initial unit tests in `tests/unit/test_localization.py`, covering language selection, translations, and safe return-path validation. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
 
 ### Security and scope
 
