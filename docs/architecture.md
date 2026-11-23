@@ -217,7 +217,7 @@ As etapas concluídas incluem:
 
 Próximas melhorias:
 
-- Implementação de testes unitários e de integração.
+- Ampliação dos testes unitários e implementação de testes de integração para os fluxos completos.
 - Validação independente do relatório após o download.
 - Integração do sistema de logs ao orquestrador.
 - Aprimoramento do tratamento de falhas.
