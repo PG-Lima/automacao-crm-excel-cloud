@@ -9,7 +9,6 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-
 RATE_URL = "https://api.frankfurter.dev/v2/rate/brl/usd"
 RATE_SOURCE_NAME = "Frankfurter"
 RATE_CACHE_SECONDS = 6 * 60 * 60  # Reference rates are refreshed a few times per business day.
