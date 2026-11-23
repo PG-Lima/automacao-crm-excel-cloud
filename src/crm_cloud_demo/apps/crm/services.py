@@ -114,20 +114,33 @@ def create_excel_report(
     records: list[dict],
     start_date: date,
     end_date: date,
+    language: str = "pt",
 ) -> BytesIO:
+    is_english = language == "en"
     workbook = Workbook()
 
     sheet = workbook.active
-    sheet.title = "Negociações"
+    sheet.title = "Deals" if is_english else "Negociações"
 
-    headers = [
-        "Identificador",
-        "Empresa",
-        "Responsável",
-        "Etapa",
-        "Valor (R$)",
-        "Data de entrada",
-    ]
+    headers = (
+        [
+            "ID",
+            "Company",
+            "Owner",
+            "Stage",
+            "Amount (BRL)",
+            "Entry date",
+        ]
+        if is_english
+        else [
+            "Identificador",
+            "Empresa",
+            "Responsável",
+            "Etapa",
+            "Valor (R$)",
+            "Data de entrada",
+        ]
+    )
 
     sheet.append(headers)
 
@@ -154,8 +167,12 @@ def create_excel_report(
         )
 
     for row in range(2, sheet.max_row + 1):
-        sheet.cell(row=row, column=5).number_format = "R$ #,##0.00"
-        sheet.cell(row=row, column=6).number_format = "DD/MM/YYYY"
+        sheet.cell(row=row, column=5).number_format = (
+            '"BRL" #,##0.00' if is_english else "R$ #,##0.00"
+        )
+        sheet.cell(row=row, column=6).number_format = (
+            "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
+        )
 
     column_widths = [18, 25, 18, 22, 18, 20]
 
@@ -165,23 +182,35 @@ def create_excel_report(
     sheet.freeze_panes = "A2"
     sheet.auto_filter.ref = sheet.dimensions
 
-    summary = workbook.create_sheet("Resumo")
+    summary = workbook.create_sheet("Summary" if is_english else "Resumo")
 
-    summary.append(["RELATÓRIO CRM - DEMONSTRAÇÃO"])
-    summary.append(["Período inicial", start_date])
-    summary.append(["Período final", end_date])
-    summary.append(["Total de negociações", len(records)])
-    summary.append(
-        [
-            "Valor total",
-            sum(record["valor"] for record in records),
-        ]
-    )
+    if is_english:
+        summary.append(["CRM REPORT - DEMONSTRATION"])
+        summary.append(["Start date", start_date])
+        summary.append(["End date", end_date])
+        summary.append(["Total deals", len(records)])
+        summary.append(
+            [
+                "Total value",
+                sum(record["valor"] for record in records),
+            ]
+        )
+    else:
+        summary.append(["RELATÓRIO CRM - DEMONSTRAÇÃO"])
+        summary.append(["Período inicial", start_date])
+        summary.append(["Período final", end_date])
+        summary.append(["Total de negociações", len(records)])
+        summary.append(
+            [
+                "Valor total",
+                sum(record["valor"] for record in records),
+            ]
+        )
 
     summary["A1"].font = Font(bold=True, size=14, color="243B53")
-    summary["B5"].number_format = "R$ #,##0.00"
-    summary["B2"].number_format = "DD/MM/YYYY"
-    summary["B3"].number_format = "DD/MM/YYYY"
+    summary["B5"].number_format = '"BRL" #,##0.00' if is_english else "R$ #,##0.00"
+    summary["B2"].number_format = "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
+    summary["B3"].number_format = "MM/DD/YYYY" if is_english else "DD/MM/YYYY"
     summary.column_dimensions["A"].width = 30
     summary.column_dimensions["B"].width = 22
 
