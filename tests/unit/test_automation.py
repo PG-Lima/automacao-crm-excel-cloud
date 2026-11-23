@@ -294,6 +294,12 @@ def test_orchestrator_runs_all_four_steps(monkeypatch, tmp_path):
     page = object()
     report = tmp_path / "report.xlsx"
     calls = []
+    logger = MagicMock()
+    monkeypatch.setattr(
+        run_module,
+        "configure_logging",
+        MagicMock(return_value=logger),
+    )
 
     @asynccontextmanager
     async def fake_browser_session():
@@ -328,6 +334,8 @@ def test_orchestrator_runs_all_four_steps(monkeypatch, tmp_path):
         "upload",
     ]
     assert calls[-1] == ("upload", page, report)
+    logger.info.assert_any_call("Iniciando automação.")
+    logger.info.assert_any_call("Automação finalizada com sucesso.")
 
 
 
@@ -370,6 +378,13 @@ def test_module_entrypoint_starts_the_automation(monkeypatch):
         calls.append(coroutine.__name__)
         coroutine.close()
 
+    from crm_cloud_demo import logging_config
+
+    monkeypatch.setattr(
+        logging_config,
+        "configure_logging",
+        MagicMock(return_value=MagicMock()),
+    )
     monkeypatch.setattr("asyncio.run", fake_asyncio_run)
 
     runpy.run_module(
@@ -378,3 +393,26 @@ def test_module_entrypoint_starts_the_automation(monkeypatch):
     )
 
     assert calls == ["run_automation"]
+
+
+
+def test_orchestrator_logs_failure_without_logging_exception_message(monkeypatch):
+    logger = MagicMock()
+    monkeypatch.setattr(
+        run_module,
+        "configure_logging",
+        MagicMock(return_value=logger),
+    )
+
+    @asynccontextmanager
+    async def failing_browser_session():
+        raise RuntimeError("sensitive failure details")
+        yield object()
+
+    monkeypatch.setattr(run_module, "browser_session", failing_browser_session)
+
+    with pytest.raises(RuntimeError, match="sensitive failure details"):
+        anyio.run(run_module.run_automation)
+
+    logger.error.assert_called_once_with("Automação falhou (%s).", "RuntimeError")
+    assert "sensitive failure details" not in str(logger.mock_calls)
