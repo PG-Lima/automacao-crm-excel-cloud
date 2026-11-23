@@ -201,11 +201,11 @@ O `pytest` e o `pytest-cov` são dependências de desenvolvimento. A suíte est�
 Com o ambiente virtual ativado e o Chromium instalado, execute a suíte completa e a análise de cobertura:
 
 ```powershell
-python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing --cov-fail-under=100 --cov-fail-under=100
 python -m ruff check src tests
 ```
 
-A cobertura informa quais linhas foram exercitadas; ela não substitui a análise de qualidade dos cenários. O GitHub Actions executa os testes e a verificação Ruff a cada push na `main` e em pull requests.
+A suíte exige 100% de cobertura de linhas do pacote testado. A cobertura informa quais linhas foram exercitadas; ela não substitui a análise de qualidade dos cenários. O GitHub Actions executa os testes e a verificação Ruff a cada push na `main` e em pull requests.
 
 ### Segurança e escopo
 
@@ -437,7 +437,7 @@ python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
 python -m ruff check src tests
 ```
 
-Coverage shows which lines were exercised; it does not replace reviewing the quality of test scenarios. GitHub Actions runs the test suite and Ruff checks on every push to `main` and on pull requests.
+The suite enforces 100% line coverage for the tested package. Coverage shows which lines were exercised; it does not replace reviewing the quality of test scenarios. GitHub Actions runs the test suite and Ruff checks on every push to `main` and on pull requests.
 
 ### Security and scope
 
