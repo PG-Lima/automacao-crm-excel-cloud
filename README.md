@@ -246,7 +246,7 @@ A funcionalidade principal, a automação com navegador e os testes unitários, 
 
 **Desenvolvido de forma independente no Brasil. Construído para demonstrar meu trabalho e, ao mesmo tempo, ajudar outras pessoas a aprender.**
 
-Documentação: [Arquitetura — PT-BR](docs/architecture.md) · [Architecture — EN](docs/architecture.en.md) · [Segurança — PT-BR](docs/security.md) · [Security — EN](docs/security.en.md)
+Documentação: [Arquitetura — PT-BR](docs/architecture.md) · [Architecture — EN](docs/architecture.en.md) · [Garantia de qualidade — PT-BR](docs/quality-assurance.md) · [Quality Assurance — EN](docs/quality-assurance.en.md) · [Segurança — PT-BR](docs/security.md) · [Security — EN](docs/security.en.md)
 
 ---
 
@@ -482,4 +482,4 @@ The core functionality, browser automation, and unit, integration, and end-to-en
 
 **Independently developed in Brazil. Built to demonstrate my work and, at the same time, help others learn.**
 
-Documentation: [Architecture — EN](docs/architecture.en.md) · [Arquitetura — PT-BR](docs/architecture.md) · [Security — EN](docs/security.en.md) · [Segurança — PT-BR](docs/security.md)
+Documentation: [Architecture — EN](docs/architecture.en.md) · [Arquitetura — PT-BR](docs/architecture.md) · [Quality Assurance — EN](docs/quality-assurance.en.md) · [Garantia de qualidade — PT-BR](docs/quality-assurance.md) · [Security — EN](docs/security.en.md) · [Segurança — PT-BR](docs/security.md)
