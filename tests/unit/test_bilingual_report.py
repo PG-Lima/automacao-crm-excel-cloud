@@ -76,3 +76,24 @@ def test_english_excel_report_requires_a_reference_rate():
             date(2026, 11, 23),
             language="en",
         )
+
+
+def test_english_excel_summary_matches_sum_of_rounded_deal_amounts():
+    records = sample_records() * 2
+    records[0]["valor"] = 0.025
+    records[1]["valor"] = 0.025
+
+    workbook = open_report(
+        create_excel_report(
+            records,
+            date(2026, 11, 1),
+            date(2026, 11, 23),
+            language="en",
+            exchange_rate=Decimal("1"),
+            rate_date=date(2026, 11, 21),
+        )
+    )
+
+    assert workbook["Deals"]["E2"].value == 0.03
+    assert workbook["Deals"]["E3"].value == 0.03
+    assert workbook["Summary"]["B5"].value == 0.06
