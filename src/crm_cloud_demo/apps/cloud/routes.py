@@ -75,7 +75,9 @@ async def login(
             status_code=401,
         )
 
+    language = get_language(request)
     request.session.clear()
+    request.session["language"] = language
     request.session["username"] = settings.cloud_demo_username
 
     return RedirectResponse("/", status_code=303)
