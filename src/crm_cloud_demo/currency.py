@@ -5,7 +5,7 @@ import threading
 import time
 from dataclasses import dataclass
 from datetime import date
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -115,4 +115,4 @@ def convert_brl_to_usd(amount: int | float | Decimal, rate: Decimal) -> Decimal:
     if not brl_amount.is_finite() or not rate.is_finite() or rate <= 0:
         raise ValueError("The amount and exchange rate must be finite; rate must be positive.")
 
-    return (brl_amount * rate).quantize(Decimal("0.01"))
+    return (brl_amount * rate).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
