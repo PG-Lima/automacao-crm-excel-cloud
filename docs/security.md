@@ -271,9 +271,9 @@ As medidas implementadas não representam certificação de segurança nem garan
 - [ ] Limitação de tentativas de autenticação.
 - [ ] Integração completa dos logs.
 - [ ] Rotação de logs.
-- [x] Testes unitários iniciais para localização e exportação de relatórios Excel.
-- [ ] Ampliação dos testes e implementação de testes de integração.
-- [ ] Auditoria automatizada de dependências.
+- [x] Testes unitários, de integração e E2E com Chromium real.
+- [x] GitHub Actions executando testes, cobertura e Ruff.
+- [ ] Auditoria automatizada de vulnerabilidades das dependências.
 - [ ] Revisão final dos arquivos preparados para publicação.
 
 ## 14. Compromisso de segurança
