@@ -4,7 +4,6 @@ from urllib.parse import urlsplit
 
 from fastapi import Request
 
-
 TRANSLATIONS = {
     "pt": {
         "html_lang": "pt-BR",
