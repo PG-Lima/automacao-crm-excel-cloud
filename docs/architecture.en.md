@@ -4,6 +4,8 @@
 
 **Learning guide:** [follow the study path](learning-guide.en.md).
 
+**Quality assurance:** [review the test strategy and execution](quality-assurance.en.md).
+
 ## 1. Overview
 
 The `automacao-crm-excel-cloud` project demonstrates a web automation workflow built with Python. It uses Playwright to control a browser and interact with two independent web applications.
