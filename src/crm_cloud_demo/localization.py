@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from urllib.parse import urlsplit
-
 from fastapi import Request
+from urllib.parse import urlsplit
 
 
 TRANSLATIONS = {
@@ -37,8 +36,14 @@ TRANSLATIONS = {
         "period_records": "Registros no período selecionado",
         "total_deal_value": "Valor total das negociações",
         "fictional_values": "Valores fictícios de demonstração",
-        "exchange_rate_note": "Conversão de BRL para USD pela taxa de referência {rate} USD por BRL · Data da taxa: {date} · Fonte: Frankfurter.",
-        "exchange_rate_unavailable": "A conversão para USD está temporariamente indisponível porque não foi possível consultar a taxa de referência.",
+        "exchange_rate_note": (
+            "Conversão de BRL para USD pela taxa de referência {rate} USD por BRL "
+            "· Data da taxa: {date} · Fonte: Frankfurter."
+        ),
+        "exchange_rate_unavailable": (
+            "A conversão para USD está temporariamente indisponível porque não foi possível "
+            "consultar a taxa de referência."
+        ),
         "dashboard_period": "Período do painel",
         "until": "Até",
         "recent_deals": "Negociações recentes",
@@ -117,8 +122,14 @@ TRANSLATIONS = {
         "period_records": "Records in the selected period",
         "total_deal_value": "Total deal value",
         "fictional_values": "Fictional demonstration values",
-        "exchange_rate_note": "Converted from BRL at {rate} USD per BRL · Rate date: {date} · Source: Frankfurter.",
-        "exchange_rate_unavailable": "USD conversion is temporarily unavailable because the reference exchange rate could not be retrieved.",
+        "exchange_rate_note": (
+            "Converted from BRL at {rate} USD per BRL · Rate date: {date} "
+            "· Source: Frankfurter."
+        ),
+        "exchange_rate_unavailable": (
+            "USD conversion is temporarily unavailable because the reference exchange rate "
+            "could not be retrieved."
+        ),
         "dashboard_period": "Dashboard period",
         "until": "Through",
         "recent_deals": "Recent deals",
