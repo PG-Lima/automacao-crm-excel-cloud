@@ -33,6 +33,8 @@ Responsibilities:
 - Allow queries by date range.
 - Generate Excel reports using openpyxl.
 - Make reports available for download.
+- Display the interface in Portuguese (PT-BR) and English.
+- Generate Excel reports with headers, stages, and summary labels in the selected language.
 
 Local address:
 
@@ -65,7 +67,8 @@ An independent web application, also built with FastAPI.
 
 Responsibilities:
 
-- Display a login page.
+- Display a login page in Portuguese and English.
+- Allow language switching on the login page and dashboard.
 - Receive `.xlsx` files.
 - Validate received files.
 - Enforce file size and structure limits.
@@ -79,6 +82,14 @@ Responsibilities:
 Local address:
 
 `http://127.0.0.1:8001`
+
+### 2.4 Languages and localization
+
+The CRM and Cloud Library provide interfaces in Portuguese (PT-BR) and English.
+
+The language preference is stored in each application's session and can be changed through the `PT-BR / EN` selector. Since the applications have independent sessions, the language can be selected separately in each system.
+
+Localization changes visible text, validation messages, date and currency formatting, and the contents of the generated Excel report. Technical field names, routes, forms, and selectors used by Playwright remain stable so the automation is not broken.
 
 ## 3. Execution workflow
 
