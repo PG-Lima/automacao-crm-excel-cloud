@@ -5,7 +5,6 @@ are imported, because the application settings are loaded at import time.
 """
 import os
 
-
 os.environ["APP_ENV"] = "test"
 os.environ["APP_DEBUG"] = "false"
 os.environ["CRM_DEMO_USERNAME"] = "test-crm-user"
