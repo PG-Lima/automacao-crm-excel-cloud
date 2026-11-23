@@ -182,7 +182,13 @@ The current implementation includes checks for situations such as:
 
 The workflow uses Python exceptions and Playwright checks to identify failures during execution.
 
-Full integration of the logging system and broader failure handling are part of the planned improvements.
+The automated test suite is divided into three levels:
+
+- **Unit tests (`tests/unit/`)**: configuration, localization, BRL/USD conversion, spreadsheet generation, document validation and persistence, logging, and robot helper functions.
+- **Integration tests (`tests/integration/`)**: authentication, CRM and Cloud Library routes, Excel export, upload, storage, and version history.
+- **E2E test (`tests/e2e/`)**: starts both applications locally, launches real Chromium through Playwright, and runs the complete robot workflow. It then verifies the downloaded file, persisted file, SHA-256 hash, and version recorded in SQLite.
+
+The GitHub Actions workflow runs the test suite with coverage and Ruff static checks on pushes to `main` and pull requests. To run locally, install Chromium in the directory configured by `PLAYWRIGHT_BROWSERS_PATH` and execute `python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing`.
 
 ## 8. Security and isolation
 
@@ -219,12 +225,11 @@ Completed implementation steps include:
 
 Planned improvements:
 
-- Expand unit tests and add integration tests for the complete workflows.
-- Independently validate the report after download.
-- Integrate the logging system with the orchestrator.
-- Improve failure handling.
-- Schedule execution through Windows Task Scheduler.
-- Expand documentation and security reviews.
+- Integrate the logging module with the orchestrator to record workflow stages.
+- Independently validate the downloaded report contents before upload.
+- Improve observability and standardize failure handling.
+- Evaluate scheduled execution through Windows Task Scheduler.
+- Evaluate a public demonstration deployment with additional controls and no real data.
 
 ## 10. Final considerations
 
