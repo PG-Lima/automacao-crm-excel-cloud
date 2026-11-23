@@ -143,7 +143,7 @@ async def dashboard(request: Request):
 
             exchange_rate_note = get_translations(language)["exchange_rate_note"].format(
                 rate=f"{exchange_rate.rate:.6f}",
-                date=exchange_rate.rate_date.isoformat(),
+                date=exchange_rate.rate_date.strftime("%m/%d/%Y"),
             )
         except ExchangeRateError:
             total_display_value = None
