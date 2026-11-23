@@ -6,6 +6,7 @@ import pytest
 
 from crm_cloud_demo.currency import (
     ExchangeRate,
+    ExchangeRateError,
     clear_exchange_rate_cache,
     convert_brl_to_usd,
     get_brl_to_usd_rate,
