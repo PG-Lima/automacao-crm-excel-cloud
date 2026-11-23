@@ -69,7 +69,9 @@ O projeto utiliza três processos locais:
 
 Execute primeiro os dois sistemas e abra suas páginas no navegador. Depois execute o robô e observe o fluxo.
 
-**Objetivo:** perceber que o CRM, a Cloud Library e a automação são componentes distintos.
+Nas telas de login e nos painéis, experimente o seletor `PT-BR / EN`. Cada aplicação mantém sua própria preferência de idioma. No CRM, gere um relatório em cada idioma e compare os cabeçalhos, os status e o resumo da planilha.
+
+**Objetivo:** perceber que o CRM, a Cloud Library e a automação são componentes distintos e observar como a localização muda a interface sem alterar o fluxo de automação.
 
 ### Etapa 3 — Siga o caminho do robô
 
@@ -141,7 +143,7 @@ Não basta observar uma mensagem de sucesso. Pense em evidências para cada etap
 - A Cloud Library apresentou a confirmação?
 - O documento aparece no histórico, com a versão e os metadados esperados?
 
-**Estado dos testes no repositório:** a versão atualmente publicada declara pytest como dependência de desenvolvimento, mas ainda não contém a pasta de testes automatizados. Portanto, não confunda a dependência instalada com uma suíte de testes publicada. Acompanhe futuras atualizações para obter os testes junto com o código correspondente.
+**Estado dos testes no repositório:** já existe um teste unitário inicial em `tests/unit/test_localization.py`, voltado à seleção de idioma, às traduções e à validação de caminhos de retorno. A cobertura dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
 
 ### Etapa 7 — Pense em como adaptar a solução
 
