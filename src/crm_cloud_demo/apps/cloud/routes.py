@@ -9,6 +9,13 @@ from fastapi import APIRouter, File, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
+from crm_cloud_demo.localization import (
+    get_language,
+    safe_next_path,
+    template_context,
+    translate_error,
+)
+
 from .storage import (
     MAX_UPLOAD_BYTES,
     InvalidDocumentError,
@@ -25,6 +32,12 @@ def _is_authenticated(request: Request) -> bool:
     return bool(request.session.get("username"))
 
 
+@router.get("/language/{language}")
+async def switch_language(request: Request, language: str, next_path: str = "/"):
+    request.session["language"] = language if language in {"pt", "en"} else "pt"
+    return RedirectResponse(safe_next_path(next_path), status_code=303)
+
+
 @router.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     if _is_authenticated(request):
@@ -33,7 +46,7 @@ async def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="login.html",
-        context={"error": None},
+        context=template_context(request, error=None),
     )
 
 
@@ -58,7 +71,7 @@ async def login(
         return templates.TemplateResponse(
             request=request,
             name="login.html",
-            context={"error": "Usuário ou senha inválidos."},
+            context=template_context(request, error=template_context(request)["t"]["invalid_credentials"]),
             status_code=401,
         )
 
@@ -84,12 +97,14 @@ async def dashboard(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="dashboard.html",
-        context={
-            "username": request.session["username"],
-            "documents": documents,
-            "success": request.query_params.get("success"),
-            "error": request.query_params.get("error"),
-        },
+        context=template_context(
+            request,
+            username=request.session["username"],
+            documents=documents,
+            success=request.query_params.get("success"),
+            error=translate_error(request.query_params.get("error", ""), get_language(request))
+            if request.query_params.get("error") else None,
+        ),
     )
 
 
@@ -109,7 +124,9 @@ async def upload_document(
             filename=file.filename or "",
             content=content,
         )
-        success_message = f"Upload concluído. Versão {result['version']}"
+        success_message = template_context(request)["t"]["upload_success"].format(
+            version=result["version"]
+        )
         query = urlencode({"success": success_message})
 
         return RedirectResponse(
