@@ -228,6 +228,12 @@ Diretrizes:
 
 A auditoria automatizada de vulnerabilidades das dependências ainda está pendente.
 
+### Consulta externa de taxa cambial
+
+A interface inglesa consulta o endpoint público `https://api.frankfurter.dev/v2/rate/brl/usd` para obter a taxa de referência BRL/USD. A requisição contém apenas o par de moedas; não envia registros comerciais, nomes, arquivos ou credenciais do CRM. A API não exige chave de autenticação. A aplicação define tempo limite de cinco segundos e mantém a taxa em cache por seis horas. Se não houver uma taxa válida disponível, os valores em USD e a exportação correspondente ficam indisponíveis, sem substituir a cotação por um número fixo.
+
+A Frankfurter publica taxas de referência, não cotações de negociação em tempo real. A interface portuguesa não depende dessa consulta e continua exibindo os valores originais em BRL.
+
 ## 12. Limites de utilização
 
 Este projeto possui finalidade exclusivamente educacional e demonstrativa.
@@ -257,6 +263,7 @@ As medidas implementadas não representam certificação de segurança nem garan
 - [x] Limitação de tamanho e estrutura dos arquivos.
 - [x] Armazenamento com identificadores únicos.
 - [x] Registro de versões e hashes.
+- [x] Consulta externa restrita à taxa BRL/USD, sem envio de dados comerciais ou credenciais.
 
 ### Melhorias pendentes
 
