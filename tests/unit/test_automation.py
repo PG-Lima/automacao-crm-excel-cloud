@@ -293,6 +293,7 @@ def test_upload_to_cloud_rejects_missing_or_unsupported_files(
 def test_orchestrator_runs_all_four_steps(monkeypatch, tmp_path):
     page = object()
     report = tmp_path / "report.xlsx"
+    report.write_bytes(b"test report")
     calls = []
     logger = MagicMock()
     monkeypatch.setattr(
