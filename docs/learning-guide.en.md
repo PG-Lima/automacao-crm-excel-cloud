@@ -82,6 +82,7 @@ Read these files in order:
 3. **src/crm_cloud_demo/automation/crm.py** — contains CRM login and report download.
 4. **src/crm_cloud_demo/automation/cloud.py** — contains Cloud Library login and file upload.
 5. **src/crm_cloud_demo/config.py** — gathers the settings used by the applications and the automation.
+6. **src/crm_cloud_demo/localization.py** — contains the Portuguese and English text and the rules that preserve the language preference.
 
 While reading, follow this sequence:
 
@@ -144,6 +145,12 @@ A success message alone is not enough. Think about evidence for each step:
 - Does the document appear in the history with the expected version and metadata?
 
 **Test status in the repository:** unit tests are available in `tests/unit/` for language selection, translations, safe return-path validation, and Excel report generation in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+
+To run the published tests, activate the virtual environment and execute:
+
+```powershell
+python -m pytest tests/unit -v
+```
 
 ### Step 7 — Think about adapting the solution
 
