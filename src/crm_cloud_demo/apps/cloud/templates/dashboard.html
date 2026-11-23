@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ t.html_lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca | Cloud Demo</title>
+    <title>{{ t.cloud_dashboard_title }}</title>
 
     <style>
         * {
@@ -43,6 +43,28 @@
             justify-content: center;
             background: #2563eb;
             border-radius: 9px;
+        }
+
+
+        .language-switch {
+            display: flex;
+            gap: 6px;
+        }
+
+        .language-switch a {
+            padding: 7px 9px;
+            border: 1px solid #475569;
+            border-radius: 7px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .language-switch a.active {
+            border-color: #60a5fa;
+            background: rgba(37, 99, 235, .2);
+            color: #bfdbfe;
         }
 
         .user-area {
@@ -253,11 +275,15 @@
         </div>
 
         <div class="user-area">
+            <nav class="language-switch" aria-label="Language">
+                <a href="/language/pt?next_path=/" class="{{ 'active' if lang == 'pt' else '' }}">PT-BR</a>
+                <a href="/language/en?next_path=/" class="{{ 'active' if lang == 'en' else '' }}">EN</a>
+            </nav>
             <span>{{ username }}</span>
 
             <form method="POST" action="/logout">
                 <button class="logout" type="submit">
-                    Sair
+                    {{ t.logout }}
                 </button>
             </form>
         </div>
@@ -266,9 +292,9 @@
     <main>
 
         <section class="page-heading">
-            <h1>Biblioteca de documentos</h1>
+            <h1>{{ t.document_library }}</h1>
             <p class="subtitle">
-                Gerencie os relatórios armazenados no ambiente demonstrativo.
+                {{ t.manage_stored_reports }}
             </p>
         </section>
 
@@ -286,21 +312,21 @@
 
         <section class="stats">
             <div class="stat-card">
-                <div class="stat-label">Documentos armazenados</div>
+                <div class="stat-label">{{ t.stored_documents }}</div>
                 <div class="stat-value">{{ documents|length }}</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-label">Formato aceito</div>
+                <div class="stat-label">{{ t.accepted_format }}</div>
                 <div class="stat-value">.XLSX</div>
             </div>
         </section>
 
         <section class="panel">
-            <h2>Enviar documento</h2>
+            <h2>{{ t.upload_document }}</h2>
 
             <p class="panel-description">
-                Selecione uma planilha Excel para armazenar na biblioteca.
+                {{ t.select_excel }}
             </p>
 
             <form
@@ -317,16 +343,16 @@
                 >
 
                 <button class="upload-button" type="submit">
-                    Enviar arquivo
+                    {{ t.send_file }}
                 </button>
             </form>
         </section>
 
         <section class="panel">
-            <h2>Documentos recentes</h2>
+            <h2>{{ t.recent_documents }}</h2>
 
             <p class="panel-description">
-                Histórico dos arquivos enviados para a biblioteca.
+                {{ t.upload_history }}
             </p>
 
             {% if documents %}
@@ -334,10 +360,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Arquivo</th>
-                                <th>Versão</th>
-                                <th>Tamanho</th>
-                                <th>Data de envio</th>
+                                <th>{{ t.file }}</th>
+                                <th>{{ t.version }}</th>
+                                <th>{{ t.size }}</th>
+                                <th>{{ t.upload_date }}</th>
                             </tr>
                         </thead>
 
@@ -368,8 +394,8 @@
                 </div>
             {% else %}
                 <div class="empty-state">
-                    <p>Nenhum documento foi enviado ainda.</p>
-                    <p>Os arquivos enviados aparecerão aqui.</p>
+                    <p>{{ t.no_documents }}</p>
+                    <p>{{ t.documents_appear }}</p>
                 </div>
             {% endif %}
         </section>
@@ -377,7 +403,7 @@
     </main>
 
     <footer>
-        AMBIENTE FICTÍCIO · PROJETO DEMONSTRATIVO
+        {{ t.cloud_footer }}
     </footer>
 
 </body>
