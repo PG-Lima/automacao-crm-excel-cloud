@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import secrets
 from datetime import date, timedelta
 from pathlib import Path
@@ -9,8 +10,10 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from crm_cloud_demo.config import settings
+from crm_cloud_demo.currency import ExchangeRateError, convert_brl_to_usd, get_brl_to_usd_rate
 from crm_cloud_demo.localization import (
     get_language,
+    get_translations,
     safe_next_path,
     template_context,
     translate_error,
@@ -119,6 +122,37 @@ async def dashboard(request: Request):
 
     start_date, end_date = _parse_date_range(None, None)
     deals = get_deals(start_date, end_date)
+    language = get_language(request)
+    total_value_brl = sum(deal["valor"] for deal in deals)
+    total_display_value = total_value_brl
+    exchange_rate_note = None
+    exchange_rate_error = False
+
+    if language == "en":
+        try:
+            exchange_rate = await asyncio.to_thread(get_brl_to_usd_rate)
+            total_display_value = convert_brl_to_usd(
+                total_value_brl,
+                exchange_rate.rate,
+            )
+            for deal in deals:
+                deal["display_value"] = convert_brl_to_usd(
+                    deal["valor"],
+                    exchange_rate.rate,
+                )
+
+            exchange_rate_note = get_translations(language)["exchange_rate_note"].format(
+                rate=f"{exchange_rate.rate:.6f}",
+                date=exchange_rate.rate_date.isoformat(),
+            )
+        except ExchangeRateError:
+            total_display_value = None
+            exchange_rate_error = True
+            for deal in deals:
+                deal["display_value"] = None
+    else:
+        for deal in deals:
+            deal["display_value"] = deal["valor"]
 
     return templates.TemplateResponse(
         request=request,
@@ -128,7 +162,9 @@ async def dashboard(request: Request):
             username=request.session["username"],
             deals=deals,
             total_deals=len(deals),
-            total_value=sum(deal["valor"] for deal in deals),
+            total_value=total_display_value,
+            exchange_rate_note=exchange_rate_note,
+            exchange_rate_error=exchange_rate_error,
             start_date=start_date.isoformat(),
             end_date=end_date.isoformat(),
             error=None,
@@ -154,7 +190,20 @@ async def download_report(
     language = get_language(request)
 
     if language == "en":
-        report = create_excel_report(deals, start, end, language="en")
+        try:
+            exchange_rate = await asyncio.to_thread(get_brl_to_usd_rate)
+        except ExchangeRateError:
+            message = get_translations(language)["exchange_rate_unavailable"]
+            return HTMLResponse(message, status_code=503)
+
+        report = create_excel_report(
+            deals,
+            start,
+            end,
+            language="en",
+            exchange_rate=exchange_rate.rate,
+            rate_date=exchange_rate.rate_date,
+        )
         filename = f"crm-report-{start:%Y%m%d}-{end:%Y%m%d}.xlsx"
     else:
         report = create_excel_report(deals, start, end)
