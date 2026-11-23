@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ t.html_lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Demo | Entrar</title>
+    <title>{{ t.crm_login_title }}</title>
 
     <style>
         * {
@@ -60,6 +60,33 @@
             margin-top: 3px;
             color: #94a3b8;
             font-size: 12px;
+        }
+
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .language-switch a {
+            padding: 7px 10px;
+            border: 1px solid rgba(148, 163, 184, .35);
+            border-radius: 7px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .language-switch a.active {
+            border-color: #60a5fa;
+            background: rgba(37, 99, 235, .2);
+            color: #bfdbfe;
         }
 
         h1 {
@@ -151,6 +178,10 @@
 </head>
 
 <body>
+    <nav class="language-switch" aria-label="Language">
+        <a href="/language/pt?next_path=/login" class="{{ 'active' if lang == 'pt' else '' }}">PT-BR</a>
+        <a href="/language/en?next_path=/login" class="{{ 'active' if lang == 'en' else '' }}">EN</a>
+    </nav>
     <main class="login-card">
         <div class="brand">
             <div class="brand-icon">C</div>
@@ -160,11 +191,10 @@
             </div>
         </div>
 
-        <h1>Bem-vindo de volta</h1>
+        <h1>{{ t.welcome_back }}</h1>
 
         <p class="description">
-            Entre na plataforma para acessar suas negociações
-            e relatórios demonstrativos.
+            {{ t.crm_login_description }}
         </p>
 
         {% if error %}
@@ -173,36 +203,36 @@
 
         <form action="/login" method="post">
             <div class="field">
-                <label for="username">Usuário</label>
+                <label for="username">{{ t.username }}</label>
                 <input
                     type="text"
                     id="username"
                     name="username"
-                    placeholder="Digite seu usuário"
+                    placeholder="{{ t.username_placeholder }}"
                     autocomplete="username"
                     required
                 >
             </div>
 
             <div class="field">
-                <label for="password">Senha</label>
+                <label for="password">{{ t.password }}</label>
                 <input
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="Digite sua senha"
+                    placeholder="{{ t.password_placeholder }}"
                     autocomplete="current-password"
                     required
                 >
             </div>
 
-            <button type="submit">Entrar na plataforma</button>
+            <button type="submit">{{ t.crm_login_button }}</button>
         </form>
 
         <div class="footer">
-            CRM Demonstrativo · Projeto de Portfólio
+            {{ t.crm_login_footer }}
             <br>
-            <span class="demo-label">Ambiente fictício e local</span>
+            <span class="demo-label">{{ t.local_demo }}</span>
         </div>
     </main>
 </body>
