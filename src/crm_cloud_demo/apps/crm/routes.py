@@ -131,15 +131,15 @@ async def dashboard(request: Request):
     if language == "en":
         try:
             exchange_rate = await asyncio.to_thread(get_brl_to_usd_rate)
-            total_display_value = convert_brl_to_usd(
-                total_value_brl,
-                exchange_rate.rate,
-            )
             for deal in deals:
                 deal["display_value"] = convert_brl_to_usd(
                     deal["valor"],
                     exchange_rate.rate,
                 )
+            total_display_value = sum(
+                (deal["display_value"] for deal in deals),
+                start=convert_brl_to_usd(0, exchange_rate.rate),
+            )
 
             exchange_rate_note = get_translations(language)["exchange_rate_note"].format(
                 rate=f"{exchange_rate.rate:.6f}",
