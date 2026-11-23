@@ -104,3 +104,21 @@ Coverage is useful evidence, but it must be considered alongside test scenarios,
 - The test suite is not a security certification and does not replace independent review.
 
 The results should be presented as automated validation of an independent educational demonstration.
+
+
+## 7. Evidence from the latest run
+
+**Run verified on November 23, 2026:** [GitHub Actions — run 45234968343](https://github.com/PG-Lima/automacao-crm-excel-cloud/actions/runs/45234968343).
+
+| Check | Result |
+|---|---:|
+| Unit, integration, and E2E tests | 111 passed |
+| Executable statements in the package | 634 |
+| Uncovered statements | 0 |
+| Package line coverage | 100% |
+| Ruff check | Passed |
+| Real Chromium and Playwright workflow | Passed |
+
+The CI environment used Python 3.14. The run verified authentication, download, upload, persistence, hashing, versioning, and logging, in addition to unit and integration scenarios.
+
+This result is a snapshot of the referenced run. New commits continue to be validated automatically by the pipeline.
