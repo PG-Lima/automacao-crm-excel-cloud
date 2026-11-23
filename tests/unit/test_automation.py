@@ -203,7 +203,10 @@ def test_download_crm_report_saves_download_in_project_directory(
 
     class DownloadContext:
         async def __aenter__(self):
-            return SimpleNamespace(value=download)
+            async def get_download():
+                return download
+
+            return SimpleNamespace(value=get_download())
 
         async def __aexit__(self, exc_type, exc, traceback):
             return False
