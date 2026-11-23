@@ -91,9 +91,14 @@ automacao-crm-excel-cloud/
 │       ├── localization.py
 │       └── logging_config.py
 ├── tests/
-│   └── unit/
-│       ├── test_localization.py
-│       └── test_bilingual_report.py
+│   ├── unit/
+│   │   ├── test_localization.py
+│   │   ├── test_bilingual_report.py
+│   │   └── ...
+│   ├── integration/
+│   │   └── test_web_apps.py
+│   └── e2e/
+│       └── test_browser_workflow.py
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture.en.md
@@ -136,10 +141,11 @@ Instale o projeto e as dependências de desenvolvimento:
 python -m pip install -e ".[dev]"
 ```
 
-Instale o Chromium:
+Instale o Chromium no diretório de navegadores do projeto:
 
 ```powershell
-playwright install chromium
+$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.playwright-browsers"
+python -m playwright install chromium
 ```
 
 ### Configuração
@@ -186,13 +192,20 @@ O robô utiliza as configurações definidas no arquivo `.env` para acessar as d
 
 ### Testes
 
-O `pytest` está declarado como dependência de desenvolvimento. O repositório inclui testes unitários em `tests/unit/` para seleção de idioma, traduções, caminhos de retorno, conversão BRL/USD, cache da taxa e exportação de relatórios Excel em português e inglês. A cobertura automatizada dos fluxos completos de CRM, Cloud Library e Playwright ainda precisa ser ampliada.
+O `pytest` e o `pytest-cov` são dependências de desenvolvimento. A suíte está organizada em três níveis:
 
-Execute os testes com o ambiente virtual ativado:
+- `tests/unit/`: regras de configuração, localização, conversão cambial, geração do Excel, armazenamento, logging e funções do robô.
+- `tests/integration/`: autenticação, rotas, exportação do CRM, upload da Cloud Library, persistência e histórico de versões.
+- `tests/e2e/`: execução real do robô com Chromium e Playwright, desde o login no CRM até a confirmação do arquivo armazenado na biblioteca.
+
+Com o ambiente virtual ativado e o Chromium instalado, execute a suíte completa e a análise de cobertura:
 
 ```powershell
-python -m pytest tests/unit -v
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m ruff check src tests
 ```
+
+A cobertura informa quais linhas foram exercitadas; ela não substitui a análise de qualidade dos cenários. O GitHub Actions executa os testes e a verificação Ruff a cada push na `main` e em pull requests.
 
 ### Segurança e escopo
 
@@ -359,10 +372,11 @@ Install the project and development dependencies:
 python -m pip install -e ".[dev]"
 ```
 
-Install Chromium:
+Install Chromium in the project's browser directory:
 
 ```powershell
-playwright install chromium
+$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.playwright-browsers"
+python -m playwright install chromium
 ```
 
 ### Configuration
@@ -409,13 +423,20 @@ The robot uses the settings defined in the `.env` file to access both applicatio
 
 ### Tests
 
-`pytest` is declared as a development dependency. The repository includes unit tests in `tests/unit/` for language selection, translations, safe return-path validation, BRL/USD conversion, rate caching, and Excel report exports in Portuguese and English. Automated coverage for the full CRM, Cloud Library, and Playwright workflows still needs to be expanded.
+`pytest` and `pytest-cov` are development dependencies. The test suite is organized into three levels:
 
-Run the tests with the virtual environment activated:
+- `tests/unit/`: configuration, localization, currency conversion, Excel generation, storage, logging, and automation helpers.
+- `tests/integration/`: authentication, routes, CRM exports, Cloud Library uploads, persistence, and version history.
+- `tests/e2e/`: the actual automation robot running with Chromium and Playwright, from CRM login through confirmation that the report was stored in the library.
+
+With the virtual environment activated and Chromium installed, run the full suite and coverage report:
 
 ```powershell
-python -m pytest tests/unit -v
+python -m pytest tests -v --cov=crm_cloud_demo --cov-report=term-missing
+python -m ruff check src tests
 ```
+
+Coverage shows which lines were exercised; it does not replace reviewing the quality of test scenarios. GitHub Actions runs the test suite and Ruff checks on every push to `main` and on pull requests.
 
 ### Security and scope
 
