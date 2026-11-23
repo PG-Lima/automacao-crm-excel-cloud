@@ -89,7 +89,9 @@ O CRM e a Cloud Library oferecem interface em português (PT-BR) e inglês.
 
 A preferência é armazenada na sessão de cada aplicação e pode ser alterada pelo seletor `PT-BR / EN`. Como as aplicações possuem sessões independentes, o idioma pode ser escolhido separadamente em cada sistema.
 
-A localização altera os textos exibidos, mensagens de validação, formatação de datas e valores e conteúdo do relatório Excel. Os nomes técnicos dos campos, rotas, formulários e seletores usados pelo Playwright permanecem estáveis para não quebrar a automação.
+A localização altera os textos exibidos, mensagens de validação, formatação de datas e moedas e conteúdo do relatório Excel. Em PT-BR, os valores permanecem em reais (BRL). Em inglês, o CRM converte os valores de BRL para USD usando a taxa de referência mais recente obtida pela API Frankfurter. A data da taxa e sua origem são exibidas no painel e registradas no resumo do Excel. Os registros originais continuam em BRL; a conversão ocorre na camada de apresentação e exportação.
+
+O módulo `src/crm_cloud_demo/currency.py` consulta o par BRL/USD, valida a resposta, mantém a taxa em cache por seis horas e realiza os cálculos com `Decimal`. A Frankfurter oferece taxas de referência, não cotações de negociação em tempo real. Se a consulta falhar e não houver uma taxa em cache válida, a interface inglesa informa a indisponibilidade e o relatório em USD não é gerado. Os nomes técnicos dos campos, rotas, formulários e seletores usados pelo Playwright permanecem estáveis para não quebrar a automação.
 
 ## 3. Fluxo de execução
 
