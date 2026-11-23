@@ -19,7 +19,6 @@ from crm_cloud_demo.automation import cloud as automation_cloud
 from crm_cloud_demo.automation import crm as automation_crm
 from crm_cloud_demo.automation.run import run_automation
 
-
 pytestmark = pytest.mark.e2e
 
 
